@@ -17,6 +17,9 @@ client.on("ready", () => {
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
   client.user.setActivity(`Serving ${client.guilds.size} servers`);
+  let main = client.guilds.find(guild => guild.name == "Kirk_Irl");
+  let channel = main.channels.find(channel => channel.name == "general");
+  channel.send("OMG! I'm alive.");
 });
 
 client.on("guildCreate", guild => {
@@ -59,7 +62,7 @@ client.on("message", async message => {
     m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
   }
   
-  if(command === "say") {
+  if(command === "kirk") {
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
     // To get the "message" itself we join the `args` back into a string with spaces: 
     const sayMessage = args.join(" ");
@@ -117,7 +120,7 @@ client.on("message", async message => {
     message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
   }
   
-  if(command === "purge") {
+  if(command === "purgeThatBitchGood") {
     // This command removes all messages from all users in the channel, up to 100.
     
     // get the delete count, as an actual number.
@@ -135,6 +138,7 @@ client.on("message", async message => {
 
   if(command == "shutdown") {
     if(message.member.hasPermission("ADMINISTRATOR")){
+	await message.channel.send("Oh, it's XX:30. Yeah you can go. Goodbye");
         client.destroy();
         process.exit(1);
     }
