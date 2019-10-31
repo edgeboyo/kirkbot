@@ -1,9 +1,10 @@
 {
-  "name": "greeter-bot",
+  "name": "kirkbot",
+  "private": true,
   "version": "1.0.0",
-  "description": "My First Discord Bot",
+  "description": "Our Lord and Saviour Professor Kirk Martinez",
   "main": "bot.js",
-  "author": "Your Name",
+  "author": "SmartDevil",
   "dependencies": {
     "discord.js": "^11.5.1",
     "winston": "^3.2.1"
