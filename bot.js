@@ -17,9 +17,12 @@ client.on("ready", () => {
 	// Example of changing the bot's playing game to something useful. `client.user` is what the
 	// docs refer to as the "ClientUser".
 	client.user.setActivity(`Serving ${client.guilds.size} servers`);
-	let main = client.guilds.find(guild => guild.name == "Kirk_Irl");
-	let channel = main.channels.find(channel => channel.name == "general");
-	channel.send("OMG! I'm alive.");
+	var allGuilds = Array.from(client.guilds.values());
+	for(var i = 0; i < allGuilds.length; i++){
+		var guild = allGuilds[i];
+		var chnl = guild.channels.find(channel => channel.name == "general");
+		chnl.send("OMG! I'm alive!");
+	}
 });
 
 client.on("guildCreate", guild => {
@@ -141,6 +144,13 @@ client.on("message", async message => {
 		}
 	}
 
+	if (command == "listall") {
+		await message.channel.send("List of all servers:");
+		var allGuilds = Array.from(client.guilds.values());
+		for(var i = 0; i < allGuilds.length; i++){
+			await message.channel.send(allGuilds[i].name);
+		}
+	}
 	if (command == "shutdown") {
 		if (message.member.hasPermission("ADMINISTRATOR")) {
 			await message.channel.send("Oh, it's XX:30. Yeah you can go. Goodbye");
