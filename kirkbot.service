@@ -1,0 +1,12 @@
+[Unit]
+Description=Kirkbot (ChatSoc Discord bot)
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node /home/kirkbot/kirkbot-prod/kirkbot.sh
+WorkingDirectory=/home/kirkbot/kirkbot-prod/
+Restart=on-failure
+User=kirkbot
+
+[Install]
+WantedBy=multi-user.target
