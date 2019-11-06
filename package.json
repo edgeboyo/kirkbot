@@ -11,10 +11,17 @@
   },
   "devDependencies": {
     "@types/node": "^12.12.6",
+    "prettier": "1.18.2",
     "typescript": "^3.7.2"
   },
   "scripts": {
     "build": "tsc",
-    "start": "node build/bot.js"
+    "start": "node build/bot.js",
+    "format": "prettier --write \"**/*.ts\""
+  },
+  "prettier": {
+    "useTabs": true,
+    "printWidth": 120,
+    "tabWidth": 4
   }
 }
