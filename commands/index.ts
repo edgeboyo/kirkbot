@@ -13,13 +13,13 @@ import shutdown from "./shutdown";
 const commands: {
 	[command: string]: (message: Discord.Message, client: Discord.Client, args: string[]) => Promise<void>;
 } = {
-	ping: ping,
-	kirk: kirk,
-	kick: kick,
-	ban: ban,
-	purge: purge,
-	listall: listall,
-	shutdown: shutdown
+	ping,
+	kirk,
+	kick,
+	ban,
+	purge,
+	listall,
+	shutdown
 };
 
 export default async function(
