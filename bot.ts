@@ -1,5 +1,5 @@
 // Load up the discord.js library
-const Discord = require("discord.js");
+import * as Discord from "discord.js";
 
 // This is your client. Some people call it `bot`, some people call it `self`, 
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
@@ -7,7 +7,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 
 // Here we load the config.json file that contains our token and our prefix values. 
-const config = require("./auth.json");
+import config from "./auth.json";
 // config.token contains the bot's token
 // config.prefix contains the message prefix.
 
@@ -20,7 +20,7 @@ client.on("ready", () => {
 	var allGuilds = Array.from(client.guilds.values());
 	for(var i = 0; i < allGuilds.length; i++){
 		var guild = allGuilds[i];
-		var chnl = guild.channels.find(channel => channel.name == "general");
+		var chnl = guild.channels.find(channel => channel.name == "general") as Discord.TextChannel;
 		chnl.send("OMG! I'm alive!");
 	}
 });
@@ -61,7 +61,7 @@ client.on("message", async message => {
 	if (command === "ping") {
 		// Calculates ping between sending a message and editing it, giving a nice round-trip latency.
 		// The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
-		const m = await message.channel.send("Ping?");
+		const m = await message.channel.send("Ping?") as Discord.Message;
 		m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
 	}
 
