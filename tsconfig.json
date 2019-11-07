@@ -12,6 +12,8 @@
 		"**/node_modules/*"
 	],
 	"include": [
-		"bot.ts"
+		"bot.ts",
+		"commands/**/*",
+		"jobs/**/*"
 	]
 }
