@@ -11,34 +11,26 @@ import config from "./auth.json";
 // config.token contains the bot's token
 // config.prefix contains the message prefix.
 
-import callCommand from "./commands";
+import runCommand from "./commands";
+import { setupJobs, readyJobs } from "./jobs";
 
 client.on("ready", () => {
 	// This event will run if the bot starts, and logs in, successfully.
 	console.log(
 		`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`
 	);
-	// Example of changing the bot's playing game to something useful. `client.user` is what the
-	// docs refer to as the "ClientUser".
-	client.user.setActivity(`Serving ${client.guilds.size} server${client.guilds.size == 1 ? "" : "s"}`);
-	var allGuilds = Array.from(client.guilds.values());
-	for (var i = 0; i < allGuilds.length; i++) {
-		var guild = allGuilds[i];
-		var chnl = guild.channels.find(channel => channel.name == "general") as Discord.TextChannel;
-		chnl.send("OMG! I'm alive!");
-	}
+
+	readyJobs(client);
 });
 
 client.on("guildCreate", guild => {
 	// This event triggers when the bot joins a guild.
 	console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-	client.user.setActivity(`Serving ${client.guilds.size} server${client.guilds.size == 1 ? "" : "s"}`);
 });
 
 client.on("guildDelete", guild => {
 	// this event triggers when the bot is removed from a guild.
 	console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-	client.user.setActivity(`Serving ${client.guilds.size} server${client.guilds.size == 1 ? "" : "s"}`);
 });
 
 client.on("message", async message => {
@@ -66,7 +58,9 @@ client.on("message", async message => {
 		return;
 	}
 
-	await callCommand(command, message, client, args);
+	await runCommand(command, message, client, args);
 });
 
-client.login(config.token);
+setupJobs(client).then(() => {
+	client.login(config.token);
+});
