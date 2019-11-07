@@ -3,8 +3,8 @@ Description=Kirkbot (ChatSoc Discord bot)
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/node /home/kirkbot/kirkbot-prod/kirkbot.sh
-WorkingDirectory=/home/kirkbot/kirkbot-prod/
+ExecStart=/home/kirkbot/kirkbot.sh
+WorkingDirectory=/home/kirkbot/
 Restart=on-failure
 User=kirkbot
 
