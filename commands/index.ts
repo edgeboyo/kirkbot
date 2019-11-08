@@ -8,6 +8,7 @@ import kick from "./kick";
 import ban from "./ban";
 import purge from "./purge";
 import listall from "./listall";
+import restart from "./restart"
 import shutdown from "./shutdown";
 
 const commands: {
@@ -19,6 +20,7 @@ const commands: {
 	ban,
 	purge,
 	listall,
+	restart,
 	shutdown
 };
 
