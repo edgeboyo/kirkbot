@@ -26,6 +26,8 @@ export default {
 		}
 	},
 	ready: async function(client: Discord.Client) {
+		type RequireOne<K extends keyof T, T> = Required<Pick<T, K>> & T;
+
 		// Run at 35 minutes past every hour
 		scheduleJob("35 * * * *", () => {
 			if (calendar != null) {
@@ -33,7 +35,7 @@ export default {
 				if ((Object.values(calendar)
 					.filter(event => event.start == undefined ? false : currDate > event.start)
 					// The typecasting is done as we know that end is a Date, not Date | undefined, so it doesn't need to be rechecked
-					.filter(event => event.end == undefined ? false : currDate < event.end) as ({end: Date} & CalendarComponent)[])
+					.filter(event => event.end == undefined ? false : currDate < event.end) as RequireOne<"end", CalendarComponent>[])
 					// Ensure the event is going to end in the next hour (rules out 1st hour of 2 hour lectures)
 					.filter(event => event.end.getHours() - 1 == currDate.getHours())
 					.filter(event => event.summary?.includes("Foundations")).length > 0) {
