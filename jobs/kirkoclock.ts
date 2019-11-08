@@ -77,12 +77,17 @@ export default {
 				let currWeek: number;
 				try {
 					currWeek = await requestWeek();
+					if (currWeek == undefined) throw "Current week is undefined!";
 				} catch (e) {
 					console.error("Failed to request week: " + e);
 					return;
 				}
-				if (currWeek < schedule[spec].length && schedule[spec][currWeek] != LectureType.None) {
-					channels.forEach(c => c.send(`It's ${schedule[spec][currWeek]} O'Clock!`))
+				console.log("Kirk O'Clock triggered:", "week", currWeek);
+				if (currWeek < schedule[spec].length) {
+					console.log("Lecture type:", schedule[spec][currWeek]);
+					if (currWeek < schedule[spec].length && schedule[spec][currWeek] != LectureType.None) {
+						channels.forEach(c => c.send(`It's ${schedule[spec][currWeek]} O'Clock!`))
+					}
 				}
 			});
 		});
