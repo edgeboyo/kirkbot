@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { scheduleJob } from "node-schedule";
-import { fromURL, FullCalendar } from "ical";
+import { fromURL, FullCalendar, CalendarComponent } from "ical";
 // ICal feed URL, see https://timetable.soton.ac.uk/Feed/Get to get this
 import { icalURL } from "../auth.json";
 
@@ -30,11 +30,12 @@ export default {
 		scheduleJob("35 * * * *", () => {
 			if (calendar != null) {
 				const currDate = new Date();
-				if (Object.values(calendar)
+				if ((Object.values(calendar)
 					.filter(event => event.start == undefined ? false : currDate > event.start)
-					.filter(event => event.end == undefined ? false : currDate < event.end)
+					// The typecasting is done as we know that end is a Date, not Date | undefined, so it doesn't need to be rechecked
+					.filter(event => event.end == undefined ? false : currDate < event.end) as ({end: Date} & CalendarComponent)[])
 					// Ensure the event is going to end in the next hour (rules out 1st hour of 2 hour lectures)
-					.filter(event => event.end == undefined ? false : event.end.getHours() - 1 == currDate.getHours())
+					.filter(event => event.end.getHours() - 1 == currDate.getHours())
 					.filter(event => event.summary?.includes("Foundations")).length > 0) {
 					let channels = Array.from(client.guilds.values())
 						.map(g => g.channels.find(channel => channel.name == "general" && channel.type == "text"))
