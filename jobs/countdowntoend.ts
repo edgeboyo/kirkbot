@@ -7,8 +7,8 @@ import { icalURL } from "../auth.json";
 let calendar: FullCalendar | null = null;
 
 let messages: ((time: number) => string)[] = [
-	t => `Only ${t} minute${t == 1 ? "s":""} left of Foundations!`,
-	t => `${t} minute${t == 1 ? "s":""} until your suffering ends`
+	t => `Only ${t} minute${t == 1 ? "":"s"} left of Foundations!`,
+	t => `${t} minute${t == 1 ? "":"s"} until your suffering ends`
 ];
 
 export default {
