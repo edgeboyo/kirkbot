@@ -10,10 +10,12 @@ import purge from "./purge";
 import listall from "./listall";
 import restart from "./restart";
 import shutdown from "./shutdown";
+import help from "./help";
 
 const commands: {
 	[command: string]: (message: Discord.Message, client: Discord.Client, args: string[]) => Promise<void>;
 } = {
+	help,
 	ping,
 	kirk,
 	kick,
