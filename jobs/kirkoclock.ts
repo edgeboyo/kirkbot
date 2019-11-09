@@ -5,10 +5,10 @@ import request from "request-promise-native";
 enum LectureType {
 	None,
 	Kirk = "Kirk",
-	Andy = "Krik",
+	Andy = "Krik"
 }
 
-const fillArray = (obj: {[week: number]: LectureType}) => {
+const fillArray = (obj: { [week: number]: LectureType }) => {
 	let res: LectureType[] = [];
 	let greatestWeek = 0;
 	Object.keys(obj).forEach(week => {
@@ -61,9 +61,9 @@ export default {
 
 		const requestWeek = async () => {
 			let response: {
-				week: {week: number},
-				term: {start: number, end: number, term: string},
-				semester: {start: number, end: number, semester: number}
+				week: { week: number };
+				term: { start: number; end: number; term: string };
+				semester: { start: number; end: number; semester: number };
 			} = await request({
 				url: "http://whatweekisit.southampton.ac.uk/today.json",
 				json: true
@@ -86,10 +86,10 @@ export default {
 				if (currWeek < schedule[spec].length) {
 					console.log("Lecture type:", schedule[spec][currWeek]);
 					if (currWeek < schedule[spec].length && schedule[spec][currWeek] != LectureType.None) {
-						channels.forEach(c => c.send(`It's ${schedule[spec][currWeek]} O'Clock!`))
+						channels.forEach(c => c.send(`It's ${schedule[spec][currWeek]} O'Clock!`));
 					}
 				}
 			});
 		});
 	}
-}
+};
