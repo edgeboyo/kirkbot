@@ -16,14 +16,29 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 					return;
 				}
 				await message.channel.send("Playing...");
-				await audio.playAudio(args[1], message.member);
+				try {
+					await audio.playAudio(args[1], message.member);
+				} catch (e) {
+					await message.channel.send("Failed to play audio: " + e);
+				}
 				break;
 			case "add":
-				await audio.addAudio(args[1], message.member.guild.id);
+				try {
+					await audio.addAudio(args[1], message.member.guild.id);
+				} catch (e) {
+					await message.channel.send("Failed to add audio: " + e);
+					return;
+				}
 				await message.channel.send("Added URL!");
 				break;
 			case "remove":
-				let removed = await audio.removeAudio(args[1], message.member.guild);
+				let removed = false;
+				try {
+					removed = await audio.removeAudio(args[1], message.member.guild);
+				} catch (e) {
+					await message.channel.send("Failed to add audio: " + e);
+					return;
+				}
 				if (removed) {
 					await message.channel.send("Removed URL!");
 				} else {
