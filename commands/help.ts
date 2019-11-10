@@ -14,10 +14,15 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 										* !help - I think you already know what this one does :blush:
 										* !kirk <text> - use this to make me say ***ANYTHING*** <:bicc_kirk:631859177286795324>
 										* !ping - see delay information
-										* !listall - list of all servers, if you want to add kirkbot to your sever go to [TBA]
+										* !listall - list of all servers
+										* !purge <number> - I'll remove as many messages as you want :file_cabinet:
+										* !listall - prints list of servers
+										* !kirk, !ban - :wink:
 									But my devs are working hard to bring you more.
 									If you want to see how I work here's a link:
 									https://github.com/edgeboyo/kirkbot/
+									If you want to add kirkbot to your sever go to:
+									httpL//kirkbot.newwebstuff.tk/
 									Have fun and get ready for a lecture :sunglasses:
 	`.replace(/\t/g, '').replace(/\n\*/g, "\n	*");
 	await message.author.send(helloMessage);
