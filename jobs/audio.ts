@@ -150,9 +150,9 @@ export default {
 		if (audioCached[url] == undefined) {
 			try {
 				audioCached[url] = await request(url, {encoding: null});
-			} catch {
+			} catch (e) {
 				delete audioCached[url];
-				return;
+				throw e;
 			}
 		}
 		if (member.voiceChannel == null) return;
