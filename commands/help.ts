@@ -14,6 +14,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 										* !help - I think you already know what this one does :blush:
 										* !kirk <text> - use this to make me say ***ANYTHING*** <:bicc_kirk:631859177286795324>
 										* !ping - see delay information
+										* !listall - list of all servers, if you want to add kirkbot to your sever go to [TBA]
 									But my devs are working hard to bring you more.
 									If you want to see how I work here's a link:
 									https://github.com/edgeboyo/kirkbot/
