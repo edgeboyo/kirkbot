@@ -11,6 +11,7 @@ import listall from "./listall";
 import restart from "./restart";
 import shutdown from "./shutdown";
 import help from "./help";
+import audio from "./audio";
 
 const commands: {
 	[command: string]: (message: Discord.Message, client: Discord.Client, args: string[]) => Promise<void>;
@@ -23,7 +24,8 @@ const commands: {
 	purge,
 	listall,
 	restart,
-	shutdown
+	shutdown,
+	audio
 };
 
 export default async function(
