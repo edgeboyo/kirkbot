@@ -2,10 +2,15 @@ import * as Discord from "discord.js";
 import audio from "../jobs/audio";
 
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
-	if (message.member.hasPermission("ADMINISTRATOR") && (message.guild.id == "629265673666822144" || message.guild.id == "634026138527596554")) {
+	if (
+		message.member.hasPermission("ADMINISTRATOR") &&
+		(message.guild.id == "629265673666822144" || message.guild.id == "634026138527596554")
+	) {
 		if (args.length != 2) {
-			await message.channel.send("Available subcommands: play [url], add [url], remove [url]\n" + 
-			"Add/remove will play the set URLs randomly, play will play it immediately");
+			await message.channel.send(
+				"Available subcommands: play [url], add [url], remove [url]\n" +
+					"Add/remove will play the set URLs randomly, play will play it immediately"
+			);
 			return;
 		}
 

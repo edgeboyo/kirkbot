@@ -1,7 +1,6 @@
 import * as Discord from "discord.js";
 
-let getActivity = (client: Discord.Client) =>
-	`!help to get some info`;
+let getActivity = (client: Discord.Client) => `!help to get some info`;
 
 export default {
 	setup: async function(client: Discord.Client) {
