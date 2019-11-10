@@ -20,7 +20,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 										* !listall - list of all servers
 										* !purge <number> - I'll remove as many messages as you want :file_cabinet:
 										* !listall - prints list of servers
-										* !kirk, !ban - :wink:
+										* !kick, !ban - :wink:
 									But my devs are working hard to bring you more.
 									If you want to see how I work here's a link:
 									https://github.com/edgeboyo/kirkbot/
