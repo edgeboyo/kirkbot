@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
 
 let getActivity = (client: Discord.Client) =>
-	`Serving ${client.guilds.size} server${client.guilds.size == 1 ? "" : "s"}`;
+	`!help to get some info`;
 
 export default {
 	setup: async function(client: Discord.Client) {
