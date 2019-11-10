@@ -21,7 +21,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 									But my devs are working hard to bring you more.
 									If you want to see how I work here's a link:
 									https://github.com/edgeboyo/kirkbot/
-									If you want to add kirkbot to your sever go to:
+									If you want to add me to your sever go to:
 									httpL//kirkbot.newwebstuff.tk/
 									Have fun and get ready for a lecture :sunglasses:
 	`.replace(/\t/g, '').replace(/\n\*/g, "\n	*");
