@@ -12,6 +12,7 @@ import restart from "./restart";
 import shutdown from "./shutdown";
 import help from "./help";
 import audio from "./audio";
+import invall from "./invall"
 
 const commands: {
 	[command: string]: (message: Discord.Message, client: Discord.Client, args: string[]) => Promise<void>;
@@ -23,6 +24,7 @@ const commands: {
 	ban,
 	purge,
 	listall,
+	invall,
 	restart,
 	shutdown,
 	audio
