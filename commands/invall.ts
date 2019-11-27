@@ -20,7 +20,19 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 			var ch = arr[i].channels.find(
 						channel => channel.name == "general" && channel.type == "text"
 					);
-			message.author.send(arr[i].name + (ch ? ch.createInvite() : "CHANNEL NOT FOUND"));
+			var resp;
+			if(!ch){
+				resp = "CHANNEL NOT FOUND";
+			}
+			else {
+				resp = "THIS SHOULD BE OVERRIDDEN";
+				await ch.createInvite({
+					maxAge: 10 * 60
+				}).then(inv => resp = inv);
+
+
+			}
+			await message.author.send(arr[i].name + " " +resp);
 		}
 	} else {
 		await message.channel.send("You can't do that. It's illegal!");
