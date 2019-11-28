@@ -8,7 +8,7 @@ Go to:
 http://kirkbot.tk/
 to add him to your server
 
-## Installing and running
+## Using your own instance of KirkBot
 
 After cloning/pulling the repository use the command
 
@@ -31,3 +31,15 @@ To set up KirkBot as a systemd service you need to modify the kirkbot.service fi
 * change `User=kirkbot` to the in-system owner of the working directory
 
 Afterwards run `sudo ./kirkbot-install.sh`
+
+## Feature list
+
+## Commands
+
+* help - displays all messages to the DMs of the sender
+* listall - displays a list of all servers with KirkBot
+* kirk <text> - make the bot say something (@everyone is blocked for non-admins)
+* ping - show API information and responce time
+* purge <number> - remove multiple messages at one time
+* kick <user> - kicks user (only admins can use this)
+* ban <user> - bans user (only admins can use this)
