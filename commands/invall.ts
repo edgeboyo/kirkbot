@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import { promises } from "dns";
 
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
 	if (
@@ -6,34 +7,30 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		(message.guild.id == "629265673666822144" || message.guild.id == "634026138527596554")
 	) {
 		await message.channel.send("Check your DMs!");
+
 		await message.author.send(
-			"Invites to all servers:\n" /* +
-				Array.from(client.guilds.values())
-					.map(g => g.channels.find(
-						channel => channel.name == "general" && channel.type == "text"
-					).createInvite())
-					.join("\n") */
+			"Invites to all servers:\n" +
+				(await Promise.all(Array.from(client.guilds.values())
+					.map(async (g) => {
+						let channel = g.channels.find(
+							chan => chan.name == "general" && chan.type == "text"
+						);
+						// If there are no general channels, find a text channel
+						if (channel == null) {
+							channel = g.channels.find(
+								chan => chan.type == "text"
+							);
+
+							if (channel == null) {
+								return "No text channels found!";
+							}
+						}
+
+						let invite = await channel.createInvite({ maxAge: 10 * 60 });
+						return invite.url;
+					}))
+				).join("\n")
 		);
-		var arr = Array.from(client.guilds.values());
-		for(var i = 0; i<arr.length; i++){
-			//var ch = arr[i].defaultChannel;
-			var ch = arr[i].channels.find(
-						channel => channel.name == "general" && channel.type == "text"
-					);
-			var resp;
-			if(!ch){
-				resp = "CHANNEL NOT FOUND";
-			}
-			else {
-				resp = "THIS SHOULD BE OVERRIDDEN";
-				await ch.createInvite({
-					maxAge: 10 * 60
-				}).then(inv => resp = inv);
-
-
-			}
-			await message.author.send(arr[i].name + " " +resp);
-		}
 	} else {
 		await message.channel.send("You can't do that. It's illegal!");
 	}
