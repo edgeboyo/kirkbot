@@ -10,29 +10,26 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 
 		await message.author.send(
 			"Invites to all servers:\n" +
-				(await Promise.all(Array.from(client.guilds.values())
-					.map(async (g) => {
-						let channel = g.channels.find(
-							chan => chan.name == "general" && chan.type == "text"
-						);
-						// If there are no general channels, find a text channel
-						if (channel == null) {
-							channel = g.channels.find(
-								chan => chan.type == "text"
-							);
-
+				(
+					await Promise.all(
+						Array.from(client.guilds.values()).map(async g => {
+							let channel = g.channels.find(chan => chan.name == "general" && chan.type == "text");
+							// If there are no general channels, find a text channel
 							if (channel == null) {
-								return "No text channels found!";
-							}
-						}
+								channel = g.channels.find(chan => chan.type == "text");
 
-						let invite = await channel.createInvite({ maxAge: 10 * 60 });
-						return invite.url;
-					}))
+								if (channel == null) {
+									return "No text channels found!";
+								}
+							}
+
+							let invite = await channel.createInvite({ maxAge: 10 * 60 });
+							return invite.url;
+						})
+					)
 				).join("\n")
 		);
 	} else {
 		await message.channel.send("You can't do that. It's illegal!");
 	}
-	
 }
