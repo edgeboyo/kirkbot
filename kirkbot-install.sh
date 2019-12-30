@@ -1,4 +1,7 @@
 #!/bin/sh
+if [ ! -f kirkbot.service ]; then
+	./service_template.sh > kirkbot.service
+fi
 cp kirkbot.service /etc/systemd/system
-service kirkbot start
 systemctl enable kirkbot
+service kirkbot start

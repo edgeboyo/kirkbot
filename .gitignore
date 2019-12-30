@@ -5,3 +5,4 @@ node_modules/
 build/
 auth.json
 audio_config.json
+kirkbot.service
