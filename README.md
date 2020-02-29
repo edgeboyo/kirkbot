@@ -24,11 +24,7 @@ or if using Linux simply run
 
 ### Setting up the kirkbot service
 
-To set up KirkBot as a systemd service you need to modify the kirkbot.service file accordingly:
-
-* change `ExecStart=/home/kirkbot/kirkbot.sh` to point to the kirkbot.sh file
-* change `WorkingDirectory=/home/kirkbot/` to point to the directory where file is located
-* change `User=kirkbot` to the in-system owner of the working directory
+Ensure that `kirkbot-install.sh` and `service_template.sh` are executable (`chmod +x *.sh`)
 
 Afterwards run `sudo ./kirkbot-install.sh`
 
