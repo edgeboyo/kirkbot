@@ -42,4 +42,5 @@ Afterwards run `sudo ./kirkbot-install.sh`
 
 ## Add bot to your server
 
-https://discordapp.com/api/oauth2/authorize?client_id=634024886062546951&permissions=8&scope=bot
+[Click me](https://discordapp.com/api/oauth2/authorize?client_id=634024886062546951&permissions=8&scope=bot)
+
