@@ -30,7 +30,7 @@ Afterwards run `sudo ./kirkbot-install.sh`
 
 ## Feature list
 
-## Commands
+### Commands
 
 * help - displays all messages to the DMs of the sender
 * listall - displays a list of all servers with KirkBot
@@ -39,3 +39,7 @@ Afterwards run `sudo ./kirkbot-install.sh`
 * purge <number> - remove multiple messages at one time
 * kick <user> - kicks user (only admins can use this)
 * ban <user> - bans user (only admins can use this)
+
+## Add bot to your server
+
+https://discordapp.com/api/oauth2/authorize?client_id=634024886062546951&permissions=8&scope=bot
