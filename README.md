@@ -5,7 +5,7 @@ Kirkbot is a bot created for the Southhampton University Chat Society
 ## Usage of already running bot
 
 Go to:
-http://kirkbot.tk/
+[KirkBot](https://discordapp.com/api/oauth2/authorize?client_id=634024886062546951&permissions=8&scope=bot)
 to add him to your server
 
 ## Using your own instance of KirkBot
