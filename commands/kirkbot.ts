@@ -4,6 +4,13 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 	// makes the bot say something and delete the message. As an example, it's open to anyone to use.
 	// To get the "message" itself we join the `args` back into a string with spaces:
 
+	var fs = require("fs");
+
+	const dirName = "configs";
+	if (!fs.existsSync(dirName)) {
+    	fs.mkdirSync(dirName, 0o744);
+	}
+
 	if (args[0] === "init"){
 		if(args.length < 2){
 			message.channel.send("No channel provided!");
@@ -16,11 +23,16 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		};
 
 		var confstr = JSON.stringify(config);
+
+		console.log("Let's go boi!\n\n\n\n");
+
 		var fs = require('fs');
 
-		const fileName : string = message.guild.id + ".json";
-		fs.writeFile(fileName, confstr);
+		const fileName : string = "configs/" + message.guild.id + ".json";
 
+		console.log(fileName);
+
+			await fs.writeFile(fileName, confstr, function(err : Object, result : Object) {});
 		message.channel.send("Config created for " + message.guild.name);
 	}
 
@@ -31,7 +43,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		}
 		var fs = require('fs');
 
-		let rawaf = fs.readFileSync(message.guild.id + ".json");
+		let rawaf = fs.readFileSync("configs/" + message.guild.id + ".json", function(err : Object, result : Object) {});
 		let config = JSON.parse(rawaf);
 		config["deadlineinfo"].push(args[1]);
 
@@ -41,8 +53,8 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 
 		
 
-		const fileName : string = message.guild.id + ".json";
-		fs.writeFile(fileName, confstr);
+		const fileName : string = "configs/" + message.guild.id + ".json";
+		fs.writeFile(fileName, confstr, function(err : Object, result : Object) {});
 	}
 	/*
 	const sayMessage = args.join(" ");
