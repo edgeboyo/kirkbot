@@ -11,14 +11,14 @@ let audioCached: { [url: string]: Buffer } = {};
 let cachedConns: { [id: string]: Discord.VoiceConnection } = {};
 
 const updateConnections = async (client: Discord.Client) => {
-	let allGuilds = Array.from(client.guilds.values());
+	let allGuilds = Array.from(client.guilds.cache.values());
 	await Promise.all(
 		allGuilds.map(async guild => {
 			// if (audioConfig[guild.id] == undefined || audioConfig[guild.id].length == 0) {
 			// 	return;
 			// }
 
-			let chans = guild.channels.filter(channel => channel.type == "voice") as Discord.Collection<
+			let chans = guild.channels.cache.filter(channel => channel.type == "voice") as Discord.Collection<
 				Discord.Snowflake,
 				Discord.VoiceChannel
 			>;
@@ -105,7 +105,7 @@ export default {
 
 				let stream = new ReadableStreamBuffer();
 				stream.put(audioCached[url]);
-				conn?.playOpusStream(stream.pipe(new opus.OggDemuxer()));
+				conn?.play(stream.pipe(new opus.OggDemuxer()));
 			});
 		}, 5000);
 	},
@@ -137,7 +137,7 @@ export default {
 			}
 			// Ensure channels are disconnected from
 			if (audioCached[guild.id]?.length == 0) {
-				let chans = guild.channels.filter(channel => channel.type == "voice") as Discord.Collection<
+				let chans = guild.channels.cache.filter(channel => channel.type == "voice") as Discord.Collection<
 					Discord.Snowflake,
 					Discord.VoiceChannel
 				>;
@@ -167,13 +167,13 @@ export default {
 				throw e;
 			}
 		}
-		if (member.voiceChannel == null) return;
-		let chan = member.voiceChannel;
+		if (member.voice.channel == null) return;
+		let chan = member.voice.channel;
 		let conn = await manualJoin(chan);
 
 		let stream = new ReadableStreamBuffer();
 		stream.put(audioCached[url]);
-		conn?.playOpusStream(stream.pipe(new opus.OggDemuxer())).on("end", () => {
+		conn?.play(stream.pipe(new opus.OggDemuxer())).on("end", () => {
 			manualLeave(chan);
 		});
 	}

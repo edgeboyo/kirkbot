@@ -1,6 +1,8 @@
 import * as Discord from "discord.js";
 
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
+	if (message.member == null || message.guild == null)
+		return;
 	if (
 		message.member.hasPermission("ADMINISTRATOR") &&
 		(message.guild.id == "629265673666822144" || message.guild.id == "634026138527596554")

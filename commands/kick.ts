@@ -1,6 +1,8 @@
 import * as Discord from "discord.js";
 
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
+	if (message.member == null || message.guild == null || message.mentions.members == null)
+		return;
 	// This command must be limited to mods and admins. In this example we just hardcode the role names.
 	// Please read on Array.some() to understand this bit:
 	// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
@@ -13,7 +15,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 	// Let's first check if we have a member and if we can kick them!
 	// message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
 	// We can also support getting the member by ID, which would be args[0]
-	let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+	let member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
 	if (!member) {
 		message.reply("Please mention a valid member of this server");
 		return;

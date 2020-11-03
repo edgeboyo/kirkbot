@@ -6,7 +6,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 	const m = (await message.channel.send("Ping?")) as Discord.Message;
 	m.edit(
 		`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(
-			client.ping
+			client.ws.ping
 		)}ms`
 	);
 }
