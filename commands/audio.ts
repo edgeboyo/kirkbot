@@ -2,6 +2,8 @@ import * as Discord from "discord.js";
 import audio from "../jobs/audio";
 
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
+	if (message.member == null || message.guild == null)
+		return;
 	if (
 		message.member.hasPermission("ADMINISTRATOR") &&
 		(message.guild.id == "629265673666822144" || message.guild.id == "634026138527596554")
@@ -16,7 +18,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 
 		switch (args[0]) {
 			case "play":
-				if (message.member.voiceChannel == null) {
+				if (message.member.voice.channel == null) {
 					await message.channel.send("Must be in a voice channel!");
 					return;
 				}
