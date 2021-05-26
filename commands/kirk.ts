@@ -13,8 +13,22 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		message.delete().catch(O_o => {});
 		return;
 	}
-	// Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
-	message.delete().catch(O_o => {});
-	// And we get the bot to say the thing:
-	message.channel.send(sayMessage);
+	
+
+	if(message.attachments != null) {
+		var entires: Discord.MessageAttachment[] = [];
+		message.attachments.each(attach => entires.push(attach));
+
+		// Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
+		message.delete().catch(O_o => {});
+		// And we get the bot to say the thing:
+		message.channel.send(sayMessage, 
+			{files: entires});
+	}
+	else {
+		// Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
+		message.delete().catch(O_o => {});
+		// And we get the bot to say the thing:
+		message.channel.send(sayMessage);
+	}	
 }
