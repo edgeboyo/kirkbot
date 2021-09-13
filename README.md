@@ -2,12 +2,6 @@
 
 Kirkbot is a bot created for the Southhampton University Chat Society
 
-## Usage of already running bot
-
-Go to:
-[KirkBot](https://discordapp.com/api/oauth2/authorize?client_id=634024886062546951&permissions=8&scope=bot)
-to add him to your server
-
 ## Using your own instance of KirkBot
 
 After cloning/pulling the repository use the command
@@ -39,8 +33,4 @@ Afterwards run `sudo ./kirkbot-install.sh`
 * purge <number> - remove multiple messages at one time
 * kick <user> - kicks user (only admins can use this)
 * ban <user> - bans user (only admins can use this)
-
-## Add bot to your server
-
-[Click me](https://discordapp.com/api/oauth2/authorize?client_id=634024886062546951&permissions=8&scope=bot)
 
