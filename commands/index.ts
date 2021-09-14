@@ -31,7 +31,7 @@ const commands: {
 	restart,
 	shutdown,
 	audio,
-	hook
+	hook,
 	pingu
 };
 
