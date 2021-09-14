@@ -17,7 +17,7 @@ import { setupJobs, readyJobs } from "./jobs";
 client.on("ready", () => {
 	// This event will run if the bot starts, and logs in, successfully.
 	console.log(
-		`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`
+		`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`
 	);
 
 	readyJobs(client);
@@ -38,11 +38,11 @@ client.on("message", async message => {
 
 	// It's good practice to ignore other bots. This also makes your bot ignore itself
 	// and not get into a spam loop (we call that "botception").
-	if (message.author.bot) return;
+	if (message.author == null || message.author.bot) return;
 
 	// Also good practice to ignore any message that does not start with our prefix,
 	// which is set in the configuration file.
-	if (message.content.indexOf(config.prefix) !== 0) return;
+	if (message.content == null || message.content.indexOf(config.prefix) !== 0) return;
 
 	// Here we separate our "command" name, and our "arguments" for the command.
 	// e.g. if we have the message "+say Is this the real life?" , we'll get the following:
@@ -57,6 +57,8 @@ client.on("message", async message => {
 	if (command == undefined) {
 		return;
 	}
+
+	if(message.partial) return;
 
 	await runCommand(command, message, client, args);
 });

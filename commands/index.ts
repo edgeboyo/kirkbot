@@ -14,6 +14,8 @@ import help from "./help";
 import audio from "./audio";
 import invall from "./invall";
 import hook from "./hook";
+import pingu from "./pingu"
+
 
 const commands: {
 	[command: string]: (message: Discord.Message, client: Discord.Client, args: string[]) => Promise<void>;
@@ -30,6 +32,7 @@ const commands: {
 	shutdown,
 	audio,
 	hook
+	pingu
 };
 
 export default async function(

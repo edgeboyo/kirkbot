@@ -46,8 +46,8 @@ export default {
 						.filter(event => event.end.getHours() - 1 == currDate.getHours())
 						.filter(event => event.summary?.includes("Foundations")).length > 0
 				) {
-					let channels = Array.from(client.guilds.values())
-						.map(g => g.channels.find(channel => channel.name == "general" && channel.type == "text"))
+					let channels = Array.from(client.guilds.cache.values())
+						.map(g => g.channels.cache.find(channel => channel.name == "general" && channel.type == "text"))
 						.filter(c => c !== undefined) as Discord.TextChannel[];
 					// Set timeouts for the next 9 minutes (including now) to send messages
 					for (let i = 0; i < 10; i++) {

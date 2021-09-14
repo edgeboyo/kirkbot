@@ -5,7 +5,7 @@ Kirkbot is a bot created for the Southhampton University Chat Society
 ## Usage of already running bot
 
 Go to:
-http://kirkbot.tk/
+[KirkBot](https://discordapp.com/api/oauth2/authorize?client_id=634024886062546951&permissions=8&scope=bot)
 to add him to your server
 
 ## Using your own instance of KirkBot
@@ -24,17 +24,13 @@ or if using Linux simply run
 
 ### Setting up the kirkbot service
 
-To set up KirkBot as a systemd service you need to modify the kirkbot.service file accordingly:
-
-* change `ExecStart=/home/kirkbot/kirkbot.sh` to point to the kirkbot.sh file
-* change `WorkingDirectory=/home/kirkbot/` to point to the directory where file is located
-* change `User=kirkbot` to the in-system owner of the working directory
+Ensure that `kirkbot-install.sh` and `service_template.sh` are executable (`chmod +x *.sh`)
 
 Afterwards run `sudo ./kirkbot-install.sh`
 
 ## Feature list
 
-## Commands
+### Commands
 
 * help - displays all messages to the DMs of the sender
 * listall - displays a list of all servers with KirkBot
@@ -43,3 +39,8 @@ Afterwards run `sudo ./kirkbot-install.sh`
 * purge <number> - remove multiple messages at one time
 * kick <user> - kicks user (only admins can use this)
 * ban <user> - bans user (only admins can use this)
+
+## Add bot to your server
+
+[Click me](https://discordapp.com/api/oauth2/authorize?client_id=634024886062546951&permissions=8&scope=bot)
+
