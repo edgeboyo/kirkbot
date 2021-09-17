@@ -202,8 +202,15 @@ export default {
 				const { rules } = watchedMessages[reaction.message.id];
 
 				const emoji = String(reaction.emoji);
-				if (emoji in rules && reaction.message.member !== null) {
-					reaction.message.member.roles.add(rules[emoji]);
+				if (emoji in rules && reaction.message.guild !== null) {
+					try {
+						const member =
+							reaction.message.guild.members.cache.get(user.id) ||
+							(await reaction.message.guild.members.fetch(user.id));
+						member.roles.add(rules[emoji]);
+					} catch (e) {
+						return;
+					}
 				}
 			}
 		});
@@ -233,8 +240,15 @@ export default {
 				const { rules } = watchedMessages[reaction.message.id];
 
 				const emoji = String(reaction.emoji);
-				if (emoji in rules && reaction.message.member !== null) {
-					reaction.message.member.roles.remove(rules[emoji]);
+				if (emoji in rules && reaction.message.guild !== null) {
+					try {
+						const member =
+							reaction.message.guild.members.cache.get(user.id) ||
+							(await reaction.message.guild.members.fetch(user.id));
+						member.roles.add(rules[emoji]);
+					} catch (e) {
+						return;
+					}
 				}
 			}
 		});
