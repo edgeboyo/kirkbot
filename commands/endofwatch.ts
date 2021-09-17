@@ -9,8 +9,9 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-    if (args.length != 1) {
+	if (args.length != 1 || isNaN(Number(args[0]))) {
 		message.channel.send("You must provide a number to remove. Use !watch to get index of rule to remove.");
+		return;
 	}
 
 	if (unwatchMessage(Number(args[0]))) {

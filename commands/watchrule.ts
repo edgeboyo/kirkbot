@@ -13,6 +13,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		message.channel.send(
 			"You need to provide 3 arguments:\n1. Index of watcher to attach the rule (use !watch)]\n2.Emoji\n3.Role ID"
 		);
+		return;
 	}
 
 	const resolvedRole = await message.guild.roles.fetch(args[2]);
@@ -22,5 +23,9 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	addNewRule(Number(args[0]), args[1], resolvedRole);
+	if (addNewRule(Number(args[0]), args[1], resolvedRole)) {
+		message.channel.send("Established new rule");
+	} else {
+		message.channel.send("Failed to set up new watcher role");
+	}
 }
