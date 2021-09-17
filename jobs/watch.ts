@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import { unwatchFile } from "fs";
 
 interface WatcherRules {
 	inEdit: boolean;
@@ -10,8 +11,30 @@ type MessageMap = { [id: string]: WatcherRules };
 
 const watchedMessages: MessageMap = {};
 
+type EditMap = { [id: string]: WatcherRules };
+
+const currentlyEdited: EditMap = {};
+
 export function watchNewMessage(message: Discord.Message) {
 	watchedMessages[message.id] = { inEdit: true, url: message.url, rules: new Map() };
+	currentlyEdited[message.channel.id] = watchedMessages[message.id];
+}
+
+export function finishEdit(message: Discord.Message) {
+	if (message.channel.id in currentlyEdited) {
+		delete currentlyEdited[message.channel.id];
+		return true;
+	}
+	return false;
+}
+
+export function unwatchMessage(num: number) {
+	const key = Object.keys(watchedMessages)[num - 1];
+
+	if (key === undefined) return false;
+
+	delete watchedMessages[key];
+	return true;
 }
 
 export function listRules() {
