@@ -1,10 +1,9 @@
 import * as Discord from "discord.js";
-import { unwatchFile } from "fs";
 
 interface WatcherRules {
 	inEdit: boolean;
 	url: string;
-	rules: Map<Discord.Emoji, Discord.Role>;
+	rules: { [id: string]: Discord.Role };
 }
 
 type MessageMap = { [id: string]: WatcherRules };
@@ -16,7 +15,7 @@ type EditMap = { [id: string]: WatcherRules };
 const currentlyEdited: EditMap = {};
 
 export function watchNewMessage(message: Discord.Message) {
-	watchedMessages[message.id] = { inEdit: true, url: message.url, rules: new Map() };
+	watchedMessages[message.id] = { inEdit: true, url: message.url, rules: {} };
 	currentlyEdited[message.channel.id] = watchedMessages[message.id];
 }
 
@@ -39,10 +38,37 @@ export function unwatchMessage(num: number) {
 
 export function listRules() {
 	const rules = Object.entries(watchedMessages).map(([key, rules], i) => {
-		return `${i + 1}. ${rules.url}`;
+		const ruleList = Object.entries(rules.rules)
+			.map(([emoji, role], i) => {
+				return `\t${i + 1}. ${emoji} -> ${role.name}`;
+			})
+			.join("\n");
+		return `${i + 1}. ${rules.url}${ruleList}`;
 	});
 
 	return rules.join("\n");
+}
+
+export function addNewRule(message: Discord.Message, emoji: string, role: Discord.Role) {
+	if (!(message.channel.id in currentlyEdited)) {
+		return false;
+	}
+
+	currentlyEdited[message.channel.id].rules[emoji] = role;
+	return true;
+}
+
+export function removeRule(message: Discord.Message, id: number) {
+	if (!(message.channel.id in currentlyEdited)) {
+		return false;
+	}
+
+	const emoji = Object.keys(currentlyEdited[message.channel.id].rules)[id - 1];
+
+	if (emoji === undefined) return false;
+
+	delete currentlyEdited[message.channel.id].rules[emoji];
+	return true;
 }
 
 export default {
