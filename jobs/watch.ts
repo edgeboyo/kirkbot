@@ -1,10 +1,10 @@
 import * as Discord from "discord.js";
+import { readFile, writeFile } from "fs";
 
 interface WatcherRules {
-	guildId: string;
-	channelId: string;
 	url: string;
 	rules: { [id: string]: Discord.Role };
+	guildId: string;
 }
 
 type MessageMap = { [id: string]: WatcherRules };
@@ -15,11 +15,12 @@ export function watchNewMessage(message: Discord.Message) {
 	if (message.guild === null) return;
 
 	watchedMessages[message.id] = {
-		guildId: message.guild.id,
-		channelId: message.channel.id,
 		url: message.url,
+		guildId: message.guild.id,
 		rules: {}
 	};
+
+	saveWatchers();
 }
 
 export function moveMessage(num: number, message: Discord.Message) {
@@ -34,6 +35,7 @@ export function moveMessage(num: number, message: Discord.Message) {
 	watcher.url = message.url;
 
 	watchedMessages[message.id] = watcher;
+	saveWatchers();
 	return true;
 }
 
@@ -43,6 +45,7 @@ export function unwatchMessage(num: number) {
 	if (key === undefined) return false;
 
 	delete watchedMessages[key];
+	saveWatchers();
 	return true;
 }
 
@@ -69,6 +72,7 @@ export function addNewRule(index: number, emoji: string, role: Discord.Role) {
 	}
 
 	messages[normalizedIndex].rules[emoji] = role;
+	saveWatchers();
 	return true;
 }
 
@@ -93,6 +97,7 @@ export function removeRule(indexMessage: number, indexRule: number) {
 	const key = ruleKeys[normalizedRuleIndex];
 
 	delete messages[normalizedMessageIndex].rules[key];
+	saveWatchers();
 	return true;
 }
 
@@ -105,7 +110,76 @@ function saveWatchers() {
 				return [emoji, role.id];
 			})
 		);
+
+		return {
+			messageId: messageId,
+			rules: normalizedRules,
+			...ids
+		};
 	});
+
+	writeFile("watcherFile.json", JSON.stringify(normalizedWatchers, null, 2), function(err) {
+		if (err) {
+			console.error(err);
+		}
+	});
+}
+
+interface WatcherFileEntry {
+	messageId: string;
+	url: string;
+	rules: { [id: string]: string };
+	guildId: string;
+}
+
+async function loadWatchers(client: Discord.Client) {
+	console.log("Started!");
+	try {
+		readFile("./watcherFile.json", (err, data) => {
+			if (err) throw err;
+			const watcherFileContents = JSON.parse(data.toString());
+
+			console.log(watcherFileContents);
+
+			watcherFileContents.forEach(async (entry: WatcherFileEntry) => {
+				console.log(entry);
+				const { messageId, url, rules, guildId } = entry;
+
+				const guild = client.guilds.cache.get(guildId);
+
+				console.log(client.guilds.cache);
+
+				if (guild === undefined) return undefined;
+
+				const coupledRules: { [id: string]: Discord.Role } = {};
+
+				if (rules !== undefined) {
+					Object.entries(rules).forEach(async ([emoji, ruleId]) => {
+						const role = await guild.roles.fetch(ruleId);
+
+						if (role === null) {
+							return;
+						}
+
+						coupledRules[emoji] = role;
+					});
+				}
+
+				watchedMessages[messageId] = {
+					guildId,
+					url,
+					rules: coupledRules
+				};
+
+				console.log(watchedMessages[messageId]);
+			});
+		});
+	} catch (e) {
+		console.log("Failed to obtain watcherFile. No watcherfile used...");
+		console.error(e);
+		return;
+	}
+	console.log("Finished!");
 }
 
 export default {
@@ -171,5 +245,8 @@ export default {
 				}
 			}
 		});
+	},
+	ready: async function(client: Discord.Client) {
+		await loadWatchers(client);
 	}
 };
