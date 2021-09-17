@@ -1,7 +1,6 @@
 import * as Discord from "discord.js";
 
 interface WatcherRules {
-	inEdit: boolean;
 	url: string;
 	rules: { [id: string]: Discord.Role };
 }
@@ -10,21 +9,8 @@ type MessageMap = { [id: string]: WatcherRules };
 
 const watchedMessages: MessageMap = {};
 
-type EditMap = { [id: string]: WatcherRules };
-
-const currentlyEdited: EditMap = {};
-
 export function watchNewMessage(message: Discord.Message) {
-	watchedMessages[message.id] = { inEdit: true, url: message.url, rules: {} };
-	currentlyEdited[message.channel.id] = watchedMessages[message.id];
-}
-
-export function finishEdit(message: Discord.Message) {
-	if (message.channel.id in currentlyEdited) {
-		delete currentlyEdited[message.channel.id];
-		return true;
-	}
-	return false;
+	watchedMessages[message.id] = { url: message.url, rules: {} };
 }
 
 export function unwatchMessage(num: number) {
@@ -49,25 +35,40 @@ export function listRules() {
 	return rules.join("\n");
 }
 
-export function addNewRule(message: Discord.Message, emoji: string, role: Discord.Role) {
-	if (!(message.channel.id in currentlyEdited)) {
+export function addNewRule(index: number, emoji: string, role: Discord.Role) {
+	const messages = Object.values(watchedMessages);
+
+	const normalizedIndex = index - 1;
+
+	if (normalizedIndex < 0 || messages.length <= normalizedIndex) {
 		return false;
 	}
 
-	currentlyEdited[message.channel.id].rules[emoji] = role;
+	messages[normalizedIndex].rules[emoji] = role;
 	return true;
 }
 
-export function removeRule(message: Discord.Message, id: number) {
-	if (!(message.channel.id in currentlyEdited)) {
+export function removeRule(indexMessage: number, indexRule: number) {
+	const messages = Object.values(watchedMessages);
+
+	const normalizedMessageIndex = indexMessage - 1;
+
+	if (normalizedMessageIndex < 0 || messages.length <= normalizedMessageIndex) {
 		return false;
 	}
 
-	const emoji = Object.keys(currentlyEdited[message.channel.id].rules)[id - 1];
+	const { rules } = messages[normalizedMessageIndex];
+	const ruleKeys = Object.keys(rules);
 
-	if (emoji === undefined) return false;
+	const normalizedRuleIndex = indexRule - 1;
 
-	delete currentlyEdited[message.channel.id].rules[emoji];
+	if (normalizedRuleIndex < 0 || ruleKeys.length <= normalizedRuleIndex) {
+		return false;
+	}
+
+	const key = ruleKeys[normalizedRuleIndex];
+
+	delete messages[normalizedMessageIndex].rules[key];
 	return true;
 }
 

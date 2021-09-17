@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { finishEdit } from "../jobs/watch";
+import { unwatchMessage } from "../jobs/watch";
 
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
 	if (message.member == null || message.guild == null || message.mentions.members == null) return;
@@ -9,9 +9,13 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	if (finishEdit(message)) {
-		message.channel.send("Watcher edit finished! 🎉🎉🎉");
+    if (args.length != 1) {
+		message.channel.send("You must provide a number to remove. Use !watch to get index of rule to remove.");
+	}
+
+	if (unwatchMessage(Number(args[0]))) {
+		message.channel.send("Watcher removed! 🎉🎉🎉");
 	} else {
-		message.channel.send("Unable to finish edit. Maybe you're not editing anything... 🤔");
+		message.channel.send("Unable to remove watcher. Maybe check index... 🤔");
 	}
 }
