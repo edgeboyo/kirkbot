@@ -16,6 +16,7 @@ import watch from "./watch";
 import endofwatch from "./endofwatch";
 import watchrule from "./watchrule";
 import unwatchrule from "./unwatchrule";
+import movewatch from "./movewatch";
 
 const commands: {
 	[command: string]: (message: Discord.Message, client: Discord.Client, args: string[]) => Promise<void>;
@@ -33,7 +34,8 @@ const commands: {
 	watch,
 	endofwatch,
 	watchrule,
-	unwatchrule
+	unwatchrule,
+	movewatch
 };
 
 export default async function(

@@ -13,6 +13,21 @@ export function watchNewMessage(message: Discord.Message) {
 	watchedMessages[message.id] = { url: message.url, rules: {} };
 }
 
+export function moveMessage(num: number, message: Discord.Message) {
+	const key = Object.keys(watchedMessages)[num - 1];
+
+	if (key === undefined) return false;
+
+	const watcher = watchedMessages[key];
+
+	delete watchedMessages[key];
+
+	watcher.url = message.url;
+
+	watchedMessages[message.id] = watcher;
+	return true;
+}
+
 export function unwatchMessage(num: number) {
 	const key = Object.keys(watchedMessages)[num - 1];
 
