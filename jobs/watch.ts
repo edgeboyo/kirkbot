@@ -43,7 +43,7 @@ export function listRules() {
 				return `\t${i + 1}. ${emoji} -> ${role.name}`;
 			})
 			.join("\n");
-		return `${i + 1}. ${rules.url}${ruleList}`;
+		return `${i + 1}. ${rules.url}\n${ruleList}`;
 	});
 
 	return rules.join("\n");

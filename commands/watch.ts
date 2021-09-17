@@ -11,7 +11,8 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 	}
 
 	if (args.length === 0) {
-		message.channel.send(listRules());
+		const watchList = listRules();
+		message.channel.send(watchList.length === 0 ? "The watcher list is empty" : watchList);
 		return;
 	}
 
