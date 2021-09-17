@@ -133,21 +133,15 @@ interface WatcherFileEntry {
 }
 
 async function loadWatchers(client: Discord.Client) {
-	console.log("Started!");
 	try {
 		readFile("./watcherFile.json", (err, data) => {
-			if (err) throw err;
+			if (err) return;
 			const watcherFileContents = JSON.parse(data.toString());
 
-			console.log(watcherFileContents);
-
 			watcherFileContents.forEach(async (entry: WatcherFileEntry) => {
-				console.log(entry);
 				const { messageId, url, rules, guildId } = entry;
 
 				const guild = client.guilds.cache.get(guildId);
-
-				console.log(client.guilds.cache);
 
 				if (guild === undefined) return undefined;
 
@@ -179,7 +173,6 @@ async function loadWatchers(client: Discord.Client) {
 		console.error(e);
 		return;
 	}
-	console.log("Finished!");
 }
 
 export default {
