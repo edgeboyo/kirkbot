@@ -15,7 +15,8 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	const referredMessage = message.channel.messages.cache.get(args[1]);
+	const referredMessage =
+		message.channel.messages.cache.get(args[1]) || (await message.channel.messages.fetch(args[0]));
 
 	if (referredMessage === undefined) {
 		message.channel.send("This message is not valid. Watcher not established...");
