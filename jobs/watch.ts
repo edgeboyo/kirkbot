@@ -245,7 +245,7 @@ export default {
 						const member =
 							reaction.message.guild.members.cache.get(user.id) ||
 							(await reaction.message.guild.members.fetch(user.id));
-						member.roles.add(rules[emoji]);
+						member.roles.remove(rules[emoji]);
 					} catch (e) {
 						return;
 					}
