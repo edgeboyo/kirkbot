@@ -1,8 +1,7 @@
 import * as Discord from "discord.js";
 
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
-	if (message.member == null || message.guild == null || message.mentions.members == null)
-		return;
+	if (message.member == null || message.guild == null || message.mentions.members == null) return;
 	// This command must be limited to mods and admins. In this example we just hardcode the role names.
 	// Please read on Array.some() to understand this bit:
 	// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
