@@ -12,7 +12,7 @@ type MessageMap = { [id: string]: WatcherRules };
 const watchedMessages: MessageMap = {};
 
 export function watchNewMessage(message: Discord.Message) {
-	if (message.guild === null) return;
+	if (message.guild === null || message.guild === undefined) return;
 
 	watchedMessages[message.id] = {
 		url: message.url,

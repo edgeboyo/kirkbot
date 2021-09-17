@@ -16,8 +16,15 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	const referredMessage =
-		message.channel.messages.cache.get(args[0]) || (await message.channel.messages.fetch(args[0]));
+	var referredMessage: Discord.Message | undefined;
+
+	try {
+		referredMessage =
+			message.channel.messages.cache.get(args[0]) || (await message.channel.messages.fetch(args[0]));
+	} catch (e) {
+		message.channel.send("This message is not valid. Watcher not established...");
+		return;
+	}
 
 	if (referredMessage === undefined) {
 		message.channel.send("This message is not valid. Watcher not established...");
@@ -26,6 +33,5 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 
 	watchNewMessage(referredMessage);
 
-	referredMessage.react("👂");
 	message.reply(`Now watching message ${referredMessage.url}`);
 }
