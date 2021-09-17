@@ -90,6 +90,7 @@ export function removeRule(indexMessage: number, indexRule: number) {
 export default {
 	setup: async function(client: Discord.Client) {
 		client.on("messageReactionAdd", async (reaction, user) => {
+			console.log(user);
 			if (user.bot) {
 				return;
 			}
@@ -110,6 +111,14 @@ export default {
 				console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
 				// The reaction is now also fully available and the properties will be reflected accurately:
 				console.log(`${reaction.count} user(s) have given the same reaction to this message!`);
+
+				const { rules } = watchedMessages[reaction.message.id];
+
+				const emoji = String(reaction.emoji);
+				console.log(emoji);
+				if (emoji in rules && reaction.message.member !== null) {
+					reaction.message.member.roles.add(rules[emoji]);
+				}
 			}
 		});
 	}
