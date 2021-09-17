@@ -1,6 +1,8 @@
 import * as Discord from "discord.js";
 
 interface WatcherRules {
+	guildId: string;
+	channelId: string;
 	url: string;
 	rules: { [id: string]: Discord.Role };
 }
@@ -10,7 +12,14 @@ type MessageMap = { [id: string]: WatcherRules };
 const watchedMessages: MessageMap = {};
 
 export function watchNewMessage(message: Discord.Message) {
-	watchedMessages[message.id] = { url: message.url, rules: {} };
+	if (message.guild === null) return;
+
+	watchedMessages[message.id] = {
+		guildId: message.guild.id,
+		channelId: message.channel.id,
+		url: message.url,
+		rules: {}
+	};
 }
 
 export function moveMessage(num: number, message: Discord.Message) {
@@ -85,6 +94,18 @@ export function removeRule(indexMessage: number, indexRule: number) {
 
 	delete messages[normalizedMessageIndex].rules[key];
 	return true;
+}
+
+function saveWatchers() {
+	const normalizedWatchers = Object.entries(watchedMessages).map(([messageId, details]) => {
+		const { rules, ...ids } = details;
+
+		const normalizedRules = Object.fromEntries(
+			Object.entries(rules).map(([emoji, role]) => {
+				return [emoji, role.id];
+			})
+		);
+	});
 }
 
 export default {
