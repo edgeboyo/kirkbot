@@ -17,6 +17,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 										* !help - I think you already know what this one does :blush:
 										* !kirk <text> - use this to make me say ***ANYTHING*** <:bicc_kirk:631859177286795324>
 										* !ping - see delay information
+										* !pingu - see a nice birb
 										* !purge <number> - I'll remove as many messages as you want :file_cabinet:
 										* !kick, !ban - :wink:
 									But my devs are working hard to bring you more.
