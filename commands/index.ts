@@ -14,6 +14,7 @@ import audio from "./audio";
 import pingu from "./pingu";
 import watch from "./watch";
 import endofwatch from "./endofwatch";
+import watchRule from "./watchRule";
 
 const commands: {
 	[command: string]: (message: Discord.Message, client: Discord.Client, args: string[]) => Promise<void>;
@@ -29,7 +30,8 @@ const commands: {
 	audio,
 	pingu,
 	watch,
-	endofwatch
+	endofwatch,
+	watchRule
 };
 
 export default async function(
