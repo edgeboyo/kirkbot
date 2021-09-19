@@ -6,11 +6,11 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 
 	const ch = message.channel;
 
-	if(!((ch): ch is Discord.TextChannel => ch.type === 'text')(ch)) return;
+	if (!((ch): ch is Discord.TextChannel => ch.type === "text")(ch)) return;
 
-	let wh = await ch.createWebhook(message.author.username, message.author.displayAvatarURL);
-	
-	if(wh.token == null)return;
+	let wh = await ch.createWebhook(message.author.username, { avatar: message.author.displayAvatarURL() });
+
+	if (wh.token == null) return;
 
 	const cli = new Discord.WebhookClient(wh.id, wh.token);
 
