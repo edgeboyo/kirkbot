@@ -7,7 +7,6 @@ import kirk from "./kirk";
 import kick from "./kick";
 import ban from "./ban";
 import purge from "./purge";
-import listall from "./listall";
 import restart from "./restart";
 import shutdown from "./shutdown";
 import help from "./help";
@@ -15,6 +14,11 @@ import audio from "./audio";
 import invall from "./invall";
 import hook from "./hook";
 import pingu from "./pingu"
+import watch from "./watch";
+import endofwatch from "./endofwatch";
+import watchrule from "./watchrule";
+import unwatchrule from "./unwatchrule";
+import movewatch from "./movewatch";
 
 
 const commands: {
@@ -26,13 +30,16 @@ const commands: {
 	kick,
 	ban,
 	purge,
-	listall,
-	invall,
 	restart,
 	shutdown,
 	audio,
 	hook,
-	pingu
+	pingu,
+	watch,
+	endofwatch,
+	watchrule,
+	unwatchrule,
+	movewatch
 };
 
 export default async function(
