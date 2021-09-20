@@ -4,13 +4,12 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 	// Most of this command is identical to kick, except that here we'll only let admins do it.
 	// In the real world mods could ban too, but this is just an example, right? ;)
 	// TODO: should this be hasPermission("ADMINISTRATOR")? or check for thicc guru?
-	if (message.member == null || message.guild == null)
-		return;
-	if (!message.member.hasPermission("ADMINISTRATOR")) {
+	if (message.member == null || message.guild == null) return;
+	if (!message.member.permissions.has("ADMINISTRATOR")) {
 		message.reply("Sorry, you don't have permissions to use this!");
 		return;
 	}
-	if(message.mentions.members == null){
+	if (message.mentions.members == null) {
 		message.reply("Please mention a member of this server");
 		return;
 	}
@@ -29,7 +28,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 	if (!reason) reason = "No reason provided";
 
 	await member
-		.ban({reason: reason})
+		.ban({ reason: reason })
 		.catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of: ${error}`));
 	message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
 }

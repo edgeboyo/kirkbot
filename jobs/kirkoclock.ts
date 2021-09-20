@@ -56,7 +56,7 @@ const schedule: { [spec: string]: LectureType[] } = {
 export default {
 	ready: async function(client: Discord.Client) {
 		let channels = Array.from(client.guilds.cache.values())
-			.map(g => g.channels.cache.find(channel => channel.name == "general" && channel.type == "text"))
+			.map(g => g.channels.cache.find(channel => channel.name == "general" && channel.type == "GUILD_TEXT"))
 			.filter(c => c !== undefined) as Discord.TextChannel[];
 
 		const requestWeek = async () => {

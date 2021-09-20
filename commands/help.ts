@@ -7,10 +7,7 @@ function getRandomInt(max: number): number {
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
 	const whoAmI: string[] = ["God", "lecturer"];
 	var chance: number = getRandomInt(whoAmI.length);
-	const helloMessage: string =
-		"Hello I'm KirkBot but you might know me as your " +
-		whoAmI[chance] +
-		`
+	const helloMessage: string = `Hello I'm KirkBot but you might know me as your ${whoAmI[chance]}
 									I'm a ChatSoc bot, that's here to help you with anything.
 									Aside from moderating and organising stuff I also have a few commands that you might want to use!
 									Here's the list:
@@ -25,7 +22,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 									https://github.com/edgeboyo/kirkbot/
 									Have fun and get ready for a lecture :sunglasses:
 	`
-			.replace(/\t/g, "")
-			.replace(/\n\*/g, "\n	*");
+		.replace(/\t/g, "")
+		.replace(/\n\*/g, "\n	*");
 	await message.author.send(helloMessage);
 }

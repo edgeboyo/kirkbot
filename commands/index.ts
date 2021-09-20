@@ -10,7 +10,6 @@ import purge from "./purge";
 import restart from "./restart";
 import shutdown from "./shutdown";
 import help from "./help";
-import audio from "./audio";
 import pingu from "./pingu";
 import watch from "./watch";
 import endofwatch from "./endofwatch";
@@ -29,7 +28,6 @@ const commands: {
 	purge,
 	restart,
 	shutdown,
-	audio,
 	pingu,
 	watch,
 	endofwatch,

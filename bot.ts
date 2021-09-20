@@ -1,10 +1,20 @@
 // Load up the discord.js library
 import * as Discord from "discord.js";
 
+const { Intents } = Discord;
+
 // This is your client. Some people call it `bot`, some people call it `self`,
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
 // this is what we're refering to. Your client.
 const client = new Discord.Client({
+	intents: [
+		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_MEMBERS,
+		Intents.FLAGS.GUILD_MESSAGES,
+		Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+		Intents.FLAGS.DIRECT_MESSAGES,
+		Intents.FLAGS.GUILD_BANS
+	],
 	partials: ["MESSAGE", "CHANNEL", "REACTION"]
 });
 
@@ -35,7 +45,7 @@ client.on("guildDelete", guild => {
 	console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
 });
 
-client.on("message", async message => {
+client.on("messageCreate", async message => {
 	// This event will run on every single message received, from any channel or DM.
 
 	// It's good practice to ignore other bots. This also makes your bot ignore itself

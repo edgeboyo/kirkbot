@@ -7,9 +7,7 @@ export default {
 		let allGuilds = Array.from(client.guilds.cache.values());
 		await Promise.all(
 			allGuilds.map(async guild => {
-				let chan = guild.channels.cache.find(
-					channel => channel.name == "general" && channel.type == "text"
-				) as Discord.TextChannel;
+				let chan = guild.channels.cache.find(channel => channel.name == "general") as Discord.TextChannel;
 				try {
 					let msgs = await chan.messages.fetch({ limit: 5 });
 					let msg = msgs
