@@ -2,10 +2,9 @@ import * as Discord from "discord.js";
 
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
 	// This command removes all messages from all users in the channel, up to 100.
-	if (message.member == null || message.guild == null)
-		return;
+	if (message.member == null || message.guild == null) return;
 
-	if (message.member.hasPermission("ADMINISTRATOR")) {
+	if (message.member.permissions.has("ADMINISTRATOR")) {
 		// get the delete count, as an actual number.
 		const deleteCount = parseInt(args[0], 10);
 

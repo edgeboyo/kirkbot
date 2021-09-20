@@ -5,7 +5,7 @@ import { listRules, watchNewMessage } from "../jobs/watch";
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
 	if (message.member == null || message.guild == null || message.mentions.members == null) return;
 
-	if (!message.member.hasPermission("ADMINISTRATOR")) {
+	if (!message.member.permissions.has("ADMINISTRATOR")) {
 		message.reply("Sorry, you don't have permissions to use this!");
 		return;
 	}

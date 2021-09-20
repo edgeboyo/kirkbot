@@ -1,37 +1,39 @@
 {
-  "name": "kirkbot",
-  "private": true,
-  "version": "1.0.0",
-  "description": "Our Lord and Saviour Professor Kirk Martinez",
-  "main": "bot.js",
-  "author": "SmartDevil",
-  "dependencies": {
-    "discord.js": "^12.0.0",
-    "ical": "^0.6.0",
-    "node-schedule": "^1.3.2",
-    "prism-media": "^1.1.0",
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.8",
-    "stream-buffers": "^3.0.2",
-    "winston": "^3.2.1"
-  },
-  "devDependencies": {
-    "@types/ical": "^0.6.1",
-    "@types/node": "^12.12.6",
-    "@types/node-schedule": "^1.2.4",
-    "@types/request-promise-native": "^1.0.17",
-    "@types/stream-buffers": "^3.0.3",
-    "prettier": "1.19.0",
-    "typescript": "^3.7.2"
-  },
-  "scripts": {
-    "build": "tsc",
-    "start": "node build/bot.js",
-    "format": "prettier --write \"**/*.ts\""
-  },
-  "prettier": {
-    "useTabs": true,
-    "printWidth": 120,
-    "tabWidth": 4
-  }
+	"name": "kirkbot",
+	"private": true,
+	"version": "1.0.0",
+	"description": "Our Lord and Saviour Professor Kirk Martinez",
+	"main": "bot.js",
+	"author": "SmartDevil",
+	"dependencies": {
+		"@discordjs/rest": "^0.1.0-canary.0",
+		"discord-api-types": "^0.23.1",
+		"discord.js": "^13.1.0",
+		"ical": "^0.6.0",
+		"node-schedule": "^1.3.2",
+		"prism-media": "^1.1.0",
+		"request": "^2.88.0",
+		"request-promise-native": "^1.0.8",
+		"stream-buffers": "^3.0.2",
+		"winston": "^3.2.1"
+	},
+	"devDependencies": {
+		"@types/ical": "^0.6.1",
+		"@types/node": "^12.12.6",
+		"@types/node-schedule": "^1.2.4",
+		"@types/request-promise-native": "^1.0.17",
+		"@types/stream-buffers": "^3.0.3",
+		"prettier": "1.19.0",
+		"typescript": "^4.4.3"
+	},
+	"scripts": {
+		"build": "tsc",
+		"start": "node build/bot.js",
+		"format": "prettier --write \"**/*.ts\""
+	},
+	"prettier": {
+		"useTabs": true,
+		"printWidth": 120,
+		"tabWidth": 4
+	}
 }

@@ -4,7 +4,7 @@ const farewellMessages = ["Oh, it's XX:30. Yeah you can go. Goodbye", "I see. I'
 
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
 	if (message.member == null || message.guild == null) return;
-	if (message.member.hasPermission("ADMINISTRATOR")) {
+	if (message.member.permissions.has("ADMINISTRATOR")) {
 		await message.channel.send(farewellMessages[Math.floor(Math.random() * farewellMessages.length)]);
 		client.destroy();
 		process.exit(0);

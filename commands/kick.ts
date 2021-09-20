@@ -6,7 +6,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 	// Please read on Array.some() to understand this bit:
 	// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
 	// TODO: should this be hasPermission("ADMINISTRATOR")? or check for thicc guru?
-	if (!message.member.hasPermission("ADMINISTRATOR")) {
+	if (!message.member.permissions.has("ADMINISTRATOR")) {
 		message.reply("Sorry, you don't have permissions to use this!");
 		return;
 	}

@@ -6,7 +6,6 @@ import join from "./join";
 import activity from "./activity";
 import kirkOClock from "./kirkoclock";
 import countdownToEnd from "./countdowntoend";
-import audio from "./audio";
 import watch from "./watch";
 
 const jobs: { setup?: (client: Discord.Client) => Promise<void>; ready?: (client: Discord.Client) => void }[] = [
@@ -14,7 +13,6 @@ const jobs: { setup?: (client: Discord.Client) => Promise<void>; ready?: (client
 	activity,
 	kirkOClock,
 	countdownToEnd,
-	audio,
 	watch
 ];
 
