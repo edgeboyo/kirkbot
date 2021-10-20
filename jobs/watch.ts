@@ -120,7 +120,7 @@ function saveWatchers() {
 
 	writeFile("watcherFile.json", JSON.stringify(normalizedWatchers, null, 2), function(err) {
 		if (err) {
-			console.error(err);
+			console.error("[ERROR] Write error: ", err);
 		}
 	});
 }
@@ -164,13 +164,10 @@ async function loadWatchers(client: Discord.Client) {
 					url,
 					rules: coupledRules
 				};
-
-				console.log(watchedMessages[messageId]);
 			});
 		});
-	} catch (e) {
-		console.log("Failed to obtain watcherFile. No watcherfile used...");
-		console.error(e);
+	} catch (err) {
+		console.error("[WARN] Failed to obtain watcherFile: ", err);
 		return;
 	}
 }
@@ -186,19 +183,14 @@ export default {
 				// If the message this reaction belongs to was removed, the fetching might result in an API error which should be handled
 				try {
 					await reaction.fetch();
-				} catch (error) {
-					console.error("Something went wrong when fetching the message:", error);
+				} catch (err) {
+					console.error("[WARN] Something went wrong when fetching the message:", err);
 					// Return as `reaction.message.author` may be undefined/null
 					return;
 				}
 			}
 
 			if (reaction.message.id in watchedMessages) {
-				// Now the message has been cached and is fully available
-				console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
-				// The reaction is now also fully available and the properties will be reflected accurately:
-				console.log(`${reaction.count} user(s) have given the same reaction to this message!`);
-
 				const { rules } = watchedMessages[reaction.message.id];
 
 				const emoji = String(reaction.emoji);
@@ -224,19 +216,14 @@ export default {
 				// If the message this reaction belongs to was removed, the fetching might result in an API error which should be handled
 				try {
 					await reaction.fetch();
-				} catch (error) {
-					console.error("Something went wrong when fetching the message:", error);
+				} catch (err) {
+					console.error("[WARN] Something went wrong when fetching the message:", err);
 					// Return as `reaction.message.author` may be undefined/null
 					return;
 				}
 			}
 
 			if (reaction.message.id in watchedMessages) {
-				// Now the message has been cached and is fully available
-				console.log(`${reaction.message.author}'s message "${reaction.message.content}" ungained a reaction!`);
-				// The reaction is now also fully available and the properties will be reflected accurately:
-				console.log(`${reaction.count} user(s) have given the same reaction to this message!`);
-
 				const { rules } = watchedMessages[reaction.message.id];
 
 				const emoji = String(reaction.emoji);
