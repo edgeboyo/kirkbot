@@ -10,7 +10,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		var toDelete;
 		const channel = message.channel;
 
-		if (!(channel instanceof Discord.TextChannel)) return;
+		if (!(channel instanceof Discord.TextChannel) && !(channel instanceof Discord.ThreadChannel)) return;
 
 		//use the number as a message limit
 		if (deletionArgument.length > 4) {
