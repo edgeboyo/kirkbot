@@ -29,23 +29,19 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 				limit: deleteCount
 			});
 		}
-		console.log(`Have to delete ${toDelete.size} messages with bulk`);
 
 		const deleted = await channel.bulkDelete(toDelete, true);
 
-		const deletedArray = Array.from(deleted.values());
-
-		console.log(`Deleted ${deletedArray.length} messages with bulk`);
-
-		const remaining = Array.from(toDelete.values()).filter((val: Discord.Message) => {
-			return !deletedArray.includes(val);
+		const deletedArray = Array.from(deleted.values()).map((mes: Discord.Message) => {
+			return mes.id;
 		});
 
-		console.log(`Need to delete ${remaining.length} messages`);
+		const remaining = Array.from(toDelete.values()).filter((mes: Discord.Message) => {
+			return !deletedArray.includes(mes.id);
+		});
 
 		remaining.forEach(async mes => {
-			console.log(`${mes.id} -> ${mes.content}`);
-			//await channel.messages.delete(mes);
+			await channel.messages.delete(mes);
 		});
 
 		/*
