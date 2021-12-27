@@ -16,7 +16,10 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	if (removeRule(Number(args[0]), Number(args[1]))) {
+	const watcherId = Number(args[0]);
+	const ruleId = Number(args[1]);
+
+	if (removeRule(watcherId, ruleId)) {
 		message.channel.send("Rule removed! 🎉🎉🎉");
 	} else {
 		message.channel.send("Unable to remove rule. Maybe check indices... 🤔");
