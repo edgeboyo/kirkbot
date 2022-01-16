@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 
-import { moveMessage } from "../jobs/watch";
+import { getEmojis, moveMessage } from "../jobs/watch";
 
 export default async function(message: Discord.Message, client: Discord.Client, args: string[]) {
 	if (message.member == null || message.guild == null || message.mentions.members == null) return;
@@ -15,6 +15,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
+	const ruleIndex = Number(args[0]);
 	var referredMessage: Discord.Message | undefined;
 
 	try {
@@ -30,9 +31,15 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	if (moveMessage(Number(args[0]), referredMessage)) {
+	if (moveMessage(ruleIndex, referredMessage)) {
 		message.reply(`Now watching message ${referredMessage.url}`);
 	} else {
 		message.reply("Could not move message. Check index");
 	}
+
+	const emojis = getEmojis(ruleIndex);
+
+	emojis.forEach(async emoji => {
+		await referredMessage?.react(emoji);
+	});
 }
