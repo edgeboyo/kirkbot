@@ -15,7 +15,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	const ruleIndex = Number(args[0]);
+	const watcherIndex = Number(args[0]);
 	var referredMessage: Discord.Message | undefined;
 
 	try {
@@ -31,13 +31,13 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	if (moveMessage(ruleIndex, referredMessage)) {
+	if (moveMessage(watcherIndex, referredMessage)) {
 		message.reply(`Now watching message ${referredMessage.url}`);
 	} else {
 		message.reply("Could not move message. Check index");
 	}
 
-	const emojis = getEmojis(ruleIndex);
+	const emojis = getEmojis(watcherIndex);
 
 	emojis.forEach(async emoji => {
 		await referredMessage?.react(emoji);

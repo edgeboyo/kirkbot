@@ -14,9 +14,9 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	const ruleIndex = Number(args[0]);
+	const watcherIndex = Number(args[0]);
 
-	if (unwatchMessage(ruleIndex)) {
+	if (unwatchMessage(watcherIndex)) {
 		message.channel.send("Watcher removed! 🎉🎉🎉");
 	} else {
 		message.channel.send("Unable to remove watcher. Maybe check index... 🤔");

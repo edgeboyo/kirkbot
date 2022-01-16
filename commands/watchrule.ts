@@ -16,7 +16,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	const ruleIndex = Number(args[0]);
+	const watcherIndex = Number(args[0]);
 	const emoji = args[1];
 	const roleId = args[2];
 
@@ -27,7 +27,7 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	if (addNewRule(ruleIndex, emoji, resolvedRole)) {
+	if (addNewRule(watcherIndex, emoji, resolvedRole)) {
 		message.channel.send("Established new rule");
 	} else {
 		message.channel.send("Failed to set up new watcher role");
