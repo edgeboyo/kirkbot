@@ -49,6 +49,14 @@ export function unwatchMessage(num: number) {
 	return true;
 }
 
+export function getEmojis(num: number) {
+	const rules = Object.values(watchedMessages)[num - 1];
+
+	const emojis = Object.keys(rules.rules);
+
+	return emojis;
+}
+
 export function listRules() {
 	const rules = Object.entries(watchedMessages).map(([key, rules], i) => {
 		const ruleList = Object.entries(rules.rules)

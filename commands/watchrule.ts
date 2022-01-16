@@ -16,14 +16,18 @@ export default async function(message: Discord.Message, client: Discord.Client, 
 		return;
 	}
 
-	const resolvedRole = await message.guild.roles.fetch(args[2]);
+	const watcherIndex = Number(args[0]);
+	const emoji = args[1];
+	const roleId = args[2];
+
+	const resolvedRole = await message.guild.roles.fetch(roleId);
 
 	if (resolvedRole === null) {
 		message.channel.send("Not a valid role :/");
 		return;
 	}
 
-	if (addNewRule(Number(args[0]), args[1], resolvedRole)) {
+	if (addNewRule(watcherIndex, emoji, resolvedRole)) {
 		message.channel.send("Established new rule");
 	} else {
 		message.channel.send("Failed to set up new watcher role");
