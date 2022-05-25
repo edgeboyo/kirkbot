@@ -23,7 +23,7 @@ import config from "./auth.json";
 // config.token contains the bot's token
 // config.prefix contains the message prefix.
 
-import runCommand from "./commands";
+import runCommand from "./text_commands";
 import { setupJobs, readyJobs } from "./jobs";
 
 client.on("ready", () => {
