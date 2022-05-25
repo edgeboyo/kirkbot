@@ -25,6 +25,7 @@ import config from "./auth.json";
 
 import runCommand from "./text_commands";
 import { setupJobs, readyJobs } from "./jobs";
+import { setUpCommands, validateCommands } from "./slash_commands";
 
 client.on("ready", () => {
 	// This event will run if the bot starts, and logs in, successfully.
@@ -33,6 +34,10 @@ client.on("ready", () => {
 	);
 
 	readyJobs(client);
+
+	validateCommands();
+
+	setUpCommands(client);
 });
 
 client.on("guildCreate", guild => {

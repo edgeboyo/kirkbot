@@ -3,21 +3,27 @@
 //      - description - description of the commands
 //      - handler - function that handles the command with client and interaction as variables
 
-import { Client } from "discord.js";
+import { Client, CommandInteraction } from "discord.js";
 
 import { ping } from "./ping";
 
-const commands = [{ name: "ping", description: "Ping command", handler: ping }];
+type CommandDescriptor = {
+	name: string;
+	description: string;
+	handler: (client: Client, interaction: CommandInteraction) => Promise<void>;
+};
+
+const commands: CommandDescriptor[] = [{ name: "ping", description: "Ping command", handler: ping }];
 
 class ValidationError extends Error {
-	constructor(message) {
+	constructor(message: string) {
 		super(message);
 		this.name = "ValidationError";
 	}
 }
 
 export function validateCommands() {
-	const uniqueNames = [];
+	const uniqueNames: string[] = [];
 
 	const verificationReturn = commands.every(command => {
 		const { name, description, handler } = command;
@@ -52,14 +58,14 @@ export function validateCommands() {
 	}
 }
 
-function setCommands(client: Client, commands) {
+function setCommands(client: Client, commands: CommandDescriptor[]) {
 	const strippedCommands = commands.map(command => {
 		const { name, description } = command;
 
 		return { name, description };
 	});
 
-	client.application.commands.set(strippedCommands);
+	client.application?.commands.set(strippedCommands);
 }
 
 export function setUpCommands(client: Client) {
