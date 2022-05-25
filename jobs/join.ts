@@ -8,6 +8,10 @@ export default {
 		await Promise.all(
 			allGuilds.map(async guild => {
 				let chan = guild.channels.cache.find(channel => channel.name == "general") as Discord.TextChannel;
+				if (chan == undefined) {
+					console.log(`Could not fine channel general in ${guild.name}`);
+					return;
+				}
 				try {
 					let msgs = await chan.messages.fetch({ limit: 5 });
 					let msg = msgs
