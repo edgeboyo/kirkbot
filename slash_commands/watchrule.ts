@@ -6,6 +6,10 @@ async function commandName(client: Client, interaction: CommandInteraction) {
 }
 
 export default {
-	commandData: { name: "command", description: "Command Description", options: [] },
+	commandData: {
+		name: "watchrule",
+		description: "Assign a role to be allocated when a reaction is encountered (on a specific watcher)",
+		options: []
+	},
 	handler: commandName
 };

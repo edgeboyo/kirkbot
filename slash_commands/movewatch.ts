@@ -6,6 +6,10 @@ async function commandName(client: Client, interaction: CommandInteraction) {
 }
 
 export default {
-	commandData: { name: "command", description: "Command Description", options: [] },
+	commandData: {
+		name: "movewatch",
+		description: "Move the watcher from one message to another (even between channels)",
+		options: []
+	},
 	handler: commandName
 };

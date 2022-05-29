@@ -6,6 +6,6 @@ async function commandName(client: Client, interaction: CommandInteraction) {
 }
 
 export default {
-	commandData: { name: "command", description: "Command Description", options: [] },
+	commandData: { name: "unwatchrule", description: "Remove a watcher assignment rule", options: [] },
 	handler: commandName
 };

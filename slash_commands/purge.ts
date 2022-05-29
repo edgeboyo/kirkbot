@@ -6,6 +6,6 @@ async function commandName(client: Client, interaction: CommandInteraction) {
 }
 
 export default {
-	commandData: { name: "command", description: "Command Description", options: [] },
+	commandData: { name: "purge", description: "Remove a large amount of messages at once", options: [] },
 	handler: commandName
 };

@@ -6,6 +6,6 @@ async function commandName(client: Client, interaction: CommandInteraction) {
 }
 
 export default {
-	commandData: { name: "command", description: "Command Description", options: [] },
+	commandData: { name: "help", description: "Get a DM with some pointers of how to use KirkBot", options: [] },
 	handler: commandName
 };

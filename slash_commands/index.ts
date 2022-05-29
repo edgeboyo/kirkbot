@@ -5,18 +5,42 @@
 
 import { ApplicationCommandData, Client, CommandInteraction } from "discord.js";
 
+import ban from "./ban";
+import endofwatch from "./endofwatch";
+import help from "./help";
+import kick from "./kick";
+import kirk from "./kirk";
+import movewatch from "./movewatch";
 import ping from "./ping";
 import pingu from "./pingu";
-import kick from "./kick";
-import ban from "./ban";
+import purge from "./purge";
+import restart from "./restart";
+import shutdown from "./shutdown";
+import unwatchrule from "./unwatchrule";
 import watch from "./watch";
+import watchrule from "./watchrule";
 
 export type CommandDescriptor = {
 	commandData: ApplicationCommandData;
 	handler: (client: Client, interaction: CommandInteraction) => Promise<void>;
 };
 
-const commands: CommandDescriptor[] = [ping, pingu, kick, ban, watch];
+const commands: CommandDescriptor[] = [
+	ban,
+	endofwatch,
+	help,
+	kick,
+	kirk,
+	movewatch,
+	ping,
+	pingu,
+	purge,
+	restart,
+	shutdown,
+	unwatchrule,
+	watch,
+	watchrule
+];
 
 class ValidationError extends Error {
 	constructor(message: string) {
