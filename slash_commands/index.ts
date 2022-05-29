@@ -3,15 +3,20 @@
 //      - description - description of the commands
 //      - handler - function that handles the command with client and interaction as variables
 
-import { ApplicationCommandOptionData, Client, CommandInteraction } from "discord.js";
+import { ApplicationCommandData, Client, CommandInteraction } from "discord.js";
 
 import ping from "./ping";
 import pingu from "./pingu";
 import kick from "./kick";
 import ban from "./ban";
-import { CommandDescriptor } from "./CommandDescriptor";
+import watch from "./watch";
 
-const commands: CommandDescriptor[] = [ping, pingu, kick, ban];
+export type CommandDescriptor = {
+	commandData: ApplicationCommandData;
+	handler: (client: Client, interaction: CommandInteraction) => Promise<void>;
+};
+
+const commands: CommandDescriptor[] = [ping, pingu, kick, ban, watch];
 
 class ValidationError extends Error {
 	constructor(message: string) {
