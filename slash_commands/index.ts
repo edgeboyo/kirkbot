@@ -91,8 +91,6 @@ export function validateCommands() {
 function setCommands(client: Client, commands: CommandDescriptor[]) {
 	const strippedCommands = commands.map(({ commandData }) => commandData);
 
-	console.log(strippedCommands);
-
 	client.application?.commands.set(strippedCommands);
 }
 

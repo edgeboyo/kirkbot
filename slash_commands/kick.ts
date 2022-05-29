@@ -1,12 +1,12 @@
 import { Client, CommandInteraction, GuildMember } from "discord.js";
 
 async function kick(client: Client, interaction: CommandInteraction) {
-	if (interaction.member == null || interaction.memberPermissions == null || interaction.guild == null) return;
+	if (interaction.member == null || interaction.guild == null) return;
 	// This command must be limited to mods and admins. In this example we just hardcode the role names.
 	// Please read on Array.some() to understand this bit:
 	// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
 	// TODO: should this be hasPermission("ADMINISTRATOR")? or check for thicc guru?
-	if (!interaction.memberPermissions.has("ADMINISTRATOR")) {
+	if (!interaction.memberPermissions?.has("ADMINISTRATOR")) {
 		interaction.reply("Sorry, you don't have permissions to use this!");
 		return;
 	}

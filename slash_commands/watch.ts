@@ -5,7 +5,7 @@ async function watch(client: Client, interaction: CommandInteraction) {
 	if (interaction.member == null || interaction.guild == null) return;
 
 	if (!interaction.memberPermissions?.has("ADMINISTRATOR")) {
-		interaction.reply("Sorry, you don't have permissions to use this!");
+		interaction.reply({ content: "Sorry, you don't have permissions to use this!", ephemeral: true });
 		return;
 	}
 
@@ -23,7 +23,7 @@ async function watch(client: Client, interaction: CommandInteraction) {
 	var referredMessage: Message | undefined;
 
 	if (interaction.channel == null) {
-		interaction.reply("You can't perform this command out of a text channel");
+		interaction.reply({ content: "You can't perform this command out of a text channel", ephemeral: true });
 		return;
 	}
 
@@ -31,18 +31,18 @@ async function watch(client: Client, interaction: CommandInteraction) {
 		referredMessage =
 			interaction.channel.messages.cache.get(messageId) || (await interaction.channel.messages.fetch(messageId));
 	} catch (e) {
-		interaction.channel.send("This interaction is not valid. Watcher not established...");
+		interaction.reply({ content: "This interaction is not valid. Watcher not established...", ephemeral: true });
 		return;
 	}
 
 	if (!referredMessage) {
-		interaction.channel.send("This interaction is not valid. Watcher not established...");
+		interaction.reply({ content: "This interaction is not valid. Watcher not established...", ephemeral: true });
 		return;
 	}
 
 	watchNewMessage(referredMessage);
 
-	interaction.reply(`Now watching interaction ${referredMessage.url}`);
+	interaction.reply({ content: `Now watching interaction ${referredMessage.url}`, ephemeral: true });
 }
 
 export default {
