@@ -8,9 +8,10 @@ import { ApplicationCommandOptionData, Client, CommandInteraction } from "discor
 import ping from "./ping";
 import pingu from "./pingu";
 import kick from "./kick";
+import ban from "./ban";
 import { CommandDescriptor } from "./CommandDescriptor";
 
-const commands: CommandDescriptor[] = [ping, pingu, kick];
+const commands: CommandDescriptor[] = [ping, pingu, kick, ban];
 
 class ValidationError extends Error {
 	constructor(message: string) {
