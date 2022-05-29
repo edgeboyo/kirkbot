@@ -23,8 +23,9 @@ import config from "./auth.json";
 // config.token contains the bot's token
 // config.prefix contains the message prefix.
 
-import runCommand from "./commands";
+import runCommand from "./text_commands";
 import { setupJobs, readyJobs } from "./jobs";
+import { setupCommands, validateCommands } from "./slash_commands";
 
 client.on("ready", () => {
 	// This event will run if the bot starts, and logs in, successfully.
@@ -33,6 +34,10 @@ client.on("ready", () => {
 	);
 
 	readyJobs(client);
+
+	validateCommands();
+
+	setupCommands(client);
 });
 
 client.on("guildCreate", guild => {
