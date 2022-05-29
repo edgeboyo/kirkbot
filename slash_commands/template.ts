@@ -1,6 +1,11 @@
 import { Client, CommandInteraction } from "discord.js";
 
-export async function commandName(client: Client, interaction: CommandInteraction) {
+async function commandName(client: Client, interaction: CommandInteraction) {
 	// do a thing
 	// return will not be used
 }
+
+export default {
+	commandData: { name: "Command Name", description: "Command Description", options: [] },
+	handler: commandName
+};
