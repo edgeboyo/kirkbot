@@ -5,7 +5,10 @@ const farewellMessages = ["Oh, it's XX:30. Yeah you can go. Goodbye", "I see. I'
 async function shutdown(client: Client, interaction: CommandInteraction) {
 	if (interaction.member == null || interaction.guild == null) return;
 	if (interaction.memberPermissions?.has("ADMINISTRATOR")) {
-		await interaction.reply(farewellMessages[Math.floor(Math.random() * farewellMessages.length)]);
+		const message =
+			interaction.options.getString("message") ||
+			farewellMessages[Math.floor(Math.random() * farewellMessages.length)];
+		await interaction.reply(message);
 		client.destroy();
 		process.exit(0);
 	} else {
@@ -14,6 +17,10 @@ async function shutdown(client: Client, interaction: CommandInteraction) {
 }
 
 export default {
-	commandData: { name: "shutdown", description: "Turn KirkBot off entirely :(", options: [] },
+	commandData: {
+		name: "shutdown",
+		description: "Turn KirkBot off entirely :(",
+		options: [{ name: "message", type: "STRING", description: "An optional message to display on exit" }]
+	},
 	handler: shutdown
 };
