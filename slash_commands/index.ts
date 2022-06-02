@@ -111,6 +111,10 @@ export function setupCommands(client: Client) {
 			return;
 		}
 
-		command.handler(client, interaction);
+		try {
+			command.handler(client, interaction);
+		} catch (e) {
+			console.error(e);
+		}
 	});
 }
