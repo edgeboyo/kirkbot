@@ -31,14 +31,21 @@ async function movewatch(client: Client, interaction: CommandInteraction) {
 		return;
 	}
 
+	var emojis: string[];
+
+	try {
+		emojis = getEmojis(watcherIndex);
+	} catch (e) {
+		interaction.reply({ content: "Could not move message. Check index", ephemeral: true });
+		return;
+	}
+
 	if (moveMessage(watcherIndex, referredMessage)) {
 		interaction.reply({ content: `Now watching message ${referredMessage.url}`, ephemeral: true });
 	} else {
 		interaction.reply({ content: "Could not move message. Check index", ephemeral: true });
 		return;
 	}
-
-	const emojis = getEmojis(watcherIndex);
 
 	emojis.forEach(async emoji => {
 		await referredMessage?.react(emoji);

@@ -52,6 +52,10 @@ export function unwatchMessage(num: number) {
 export function getEmojis(num: number) {
 	const rules = Object.values(watchedMessages)[num - 1];
 
+	if (!rules) {
+		throw "Could not fine a watcher with that index!";
+	}
+
 	const emojis = Object.keys(rules.rules);
 
 	return emojis;
