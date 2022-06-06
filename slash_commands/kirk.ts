@@ -19,7 +19,7 @@ async function kirk(client: Client, interaction: CommandInteraction) {
 export default {
 	commandData: {
 		name: "kirk",
-		description: "Make me say something",
+		description: "Make KirkBot say something",
 		options: [
 			{ name: "message", type: "STRING", description: "Message for KirkBot to say", required: true },
 			{ name: "covert", type: "BOOLEAN", description: "Set to True to not reveal who sent the message" }
