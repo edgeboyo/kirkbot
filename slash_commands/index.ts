@@ -14,6 +14,7 @@ import movewatch from "./movewatch";
 import ping from "./ping";
 import pingu from "./pingu";
 import purge from "./purge";
+import react from "./react";
 import restart from "./restart";
 import shutdown from "./shutdown";
 import unwatchrule from "./unwatchrule";
@@ -35,6 +36,7 @@ const commands: CommandDescriptor[] = [
 	ping,
 	pingu,
 	purge,
+	react,
 	restart,
 	shutdown,
 	unwatchrule,
