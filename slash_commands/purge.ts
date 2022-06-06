@@ -47,7 +47,7 @@ async function purge(client: Client, interaction: CommandInteraction) {
 			return;
 		}
 
-		await interaction.reply(`Deleting ${toDelete.size} messages...`);
+		await interaction.deferReply({ ephemeral: true });
 
 		const deleted = await channel.bulkDelete(toDelete, true);
 
@@ -65,9 +65,7 @@ async function purge(client: Client, interaction: CommandInteraction) {
 			})
 		);
 
-		await interaction.editReply(`Messages deleted... This will disappear in 10 seconds...`);
-
-		setTimeout(() => interaction.deleteReply(), 10000);
+		await interaction.editReply(`${toDelete.size} messages deleted...`);
 	} else {
 		interaction.reply({ content: "Sorry, you don't have permissions to use this!", ephemeral: true });
 		return;

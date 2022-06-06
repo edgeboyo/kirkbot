@@ -36,7 +36,7 @@ async function react(client: Client, interaction: CommandInteraction) {
 		return;
 	}
 
-	interaction.deferReply({ ephemeral: true });
+	await interaction.deferReply({ ephemeral: true });
 
 	var reactions = 0;
 
@@ -52,7 +52,7 @@ async function react(client: Client, interaction: CommandInteraction) {
 			} catch (e) {}
 		})
 	);
-	interaction.editReply({ content: `Parsed and reacted with ${reactions} reactions` });
+	await interaction.editReply({ content: `Parsed and reacted with ${reactions} reactions` });
 }
 
 export default {
