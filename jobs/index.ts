@@ -4,15 +4,11 @@ import * as Discord from "discord.js";
 
 import join from "./join";
 import activity from "./activity";
-import kirkOClock from "./kirkoclock";
-import countdownToEnd from "./countdowntoend";
 import watch from "./watch";
 
 const jobs: { setup?: (client: Discord.Client) => Promise<void>; ready?: (client: Discord.Client) => void }[] = [
 	join,
 	activity,
-	kirkOClock,
-	countdownToEnd,
 	watch
 ];
 
