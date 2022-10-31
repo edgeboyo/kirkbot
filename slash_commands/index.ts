@@ -6,6 +6,7 @@
 import { ApplicationCommandData, Client, CommandInteraction } from "discord.js";
 
 import ban from "./ban";
+import chillout from "./chillout";
 import endofwatch from "./endofwatch";
 import help from "./help";
 import kick from "./kick";
@@ -28,6 +29,7 @@ export type CommandDescriptor = {
 
 const commands: CommandDescriptor[] = [
 	ban,
+	chillout,
 	endofwatch,
 	help,
 	kick,
