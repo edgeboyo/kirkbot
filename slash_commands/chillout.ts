@@ -36,8 +36,8 @@ async function chillout(client: Client, interaction: CommandInteraction) {
 		return;
 	}
 
-	let reason = interaction.options.getString("reason");
-	if (!reason) reason = "No reason provided";
+	let reason: string | null | undefined = interaction.options.getString("reason");
+	if (!reason) reason = undefined;
 
 	const resp = await member.timeout(howLong, reason).catch(error =>
 		interaction.reply({
@@ -50,9 +50,9 @@ async function chillout(client: Client, interaction: CommandInteraction) {
 		return;
 	}
 
-	let display = interaction.options.getBoolean("display");
+	let display = interaction.options.getBoolean("display_setting");
 
-	const message = `${member.user.tag} has been banned by ${interaction.member} because: ${reason}`;
+	const message = `${member.user.tag} was asked to take a chill pill for ${optionsToMessage[howLong]} because: ${reason}`;
 
 	if (display) {
 		interaction.reply(message);
@@ -71,6 +71,12 @@ const chilloutTimeOptions = {
 	"12 HOURS": 12 * 60 * 60,
 	"1 DAY": 24 * 60 * 60
 };
+
+const optionsToMessage = Object.fromEntries(
+	Object.entries(chilloutTimeOptions).map(([key, val]) => {
+		return [val, key];
+	})
+);
 
 export default {
 	commandData: {
