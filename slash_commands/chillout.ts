@@ -39,7 +39,7 @@ async function chillout(client: Client, interaction: CommandInteraction) {
 	let reason: string | null | undefined = interaction.options.getString("reason");
 	if (!reason) reason = undefined;
 
-	const resp = await member.timeout(howLong, reason).catch(error =>
+	const resp = await member.timeout(howLong * 1000, reason).catch(error =>
 		interaction.reply({
 			content: `Sorry ${interaction.member} I couldn't ban because of: ${error}`,
 			ephemeral: true
