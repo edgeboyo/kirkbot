@@ -65,7 +65,7 @@ export function listRules() {
 	const rules = Object.entries(watchedMessages).map(([key, rules], i) => {
 		const ruleList = Object.entries(rules.rules)
 			.map(([emoji, role], i) => {
-				return `\t${i + 1}. ${emoji} -> ${role.name}`;
+				return `\t${i + 1}\\. ${emoji} -> ${role.name}`;
 			})
 			.join("\n");
 		return `${i + 1}. ${rules.url}\n${ruleList}`;
