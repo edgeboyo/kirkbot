@@ -1,0 +1,26 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "docker-deployment" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag kirkbot:latest
+    - name: Create iso
+      run: docker image save -o image.tar kirkbot:latest
+    - uses: actions/upload-artifact@v4
+      with:
+        name:
+          footiebottie
+        path:
+          image.tar
+        if-no-files-found:
+          error
+        retention-days:
+          5
