@@ -4,7 +4,7 @@ RUN mkdir /configspace
 
 VOLUME /configspace
 
-ADD build/* .
+ADD build .
 
 ADD package.json .
 
