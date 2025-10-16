@@ -31,7 +31,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name:
-          footiebottie
+          kirkbot
         path:
           image.tar
         if-no-files-found:
