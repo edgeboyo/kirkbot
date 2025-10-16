@@ -4,18 +4,16 @@ RUN mkdir /configspace
 
 VOLUME /configspace
 
-RUN npm i
-
-RUN npm run build
-
 ADD build/* .
 
 ADD package.json .
 
 ADD package-lock.json .
 
-ADD config.json.template .
+ADD sample_auth.json /configspace/auth.json
 
 RUN npm i
 
-CMD ["bash", "-c", "npm start"]
+ENV CONFIG_PATH=/configspace
+
+CMD ["bash", "-c", "CONFIG_PATH=$CONFIG_PATH npm run start-docker"]

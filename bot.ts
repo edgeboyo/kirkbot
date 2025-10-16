@@ -18,10 +18,7 @@ const client = new Discord.Client({
 	partials: ["MESSAGE", "CHANNEL", "REACTION"]
 });
 
-// Here we load the config.json file that contains our token and our prefix values.
-import config from "./auth.json";
-// config.token contains the bot's token
-// config.prefix contains the message prefix.
+import { Config, getConfigJson } from "./common";
 
 import { setupJobs, readyJobs } from "./jobs";
 import { setupCommands, validateCommands } from "./slash_commands";
@@ -49,6 +46,14 @@ client.on("guildDelete", guild => {
 	console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
 });
 
-setupJobs(client).then(() => {
+setupJobs(client).then(async () => {
+	// Here we load the config.json file that contains our token and our prefix values.
+	const config = await getConfigJson(Config.AUTH);
+	// config.token contains the bot's token
+	// config.prefix contains the message prefix.
+
 	client.login(config.token);
 });
+
+
+

@@ -21,8 +21,5 @@ jobs:
     - name: Install
       run: npm install
       
-    - name: Prepare config file
-      run: cp sample_auth.json auth.json
-      
     - name: Build
       run: npm run build

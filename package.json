@@ -16,6 +16,7 @@
 	"scripts": {
 		"build": "tsc",
 		"start": "node build/bot.js",
+		"start-docker": "node bot.js",
 		"format": "prettier --write \"**/*.ts\"",
 		"dev": "tsc-watch --onSuccess \"npm start\""
 	},

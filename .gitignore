@@ -4,7 +4,6 @@
 node_modules/
 build/
 auth.json
-audio_config.json
 watcherFile.json
 kirkbot.service
 snap/

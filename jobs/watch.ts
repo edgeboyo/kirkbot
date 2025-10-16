@@ -1,5 +1,6 @@
 import * as Discord from "discord.js";
 import { readFile, writeFile } from "fs";
+import { Config, getConfigPath } from "../common";
 
 interface WatcherRules {
 	url: string;
@@ -130,7 +131,7 @@ function saveWatchers() {
 		};
 	});
 
-	writeFile("watcherFile.json", JSON.stringify(normalizedWatchers, null, 2), function(err) {
+	writeFile(getConfigPath(Config.WATCHER), JSON.stringify(normalizedWatchers, null, 2), function(err) {
 		if (err) {
 			console.error("[ERROR] Write error: ", err);
 		}
@@ -146,7 +147,7 @@ interface WatcherFileEntry {
 
 async function loadWatchers(client: Discord.Client) {
 	try {
-		readFile("./watcherFile.json", (err, data) => {
+		readFile(getConfigPath(Config.WATCHER), (err, data) => {
 			if (err) return;
 			const watcherFileContents = JSON.parse(data.toString());
 
