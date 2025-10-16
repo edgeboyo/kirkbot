@@ -13,7 +13,6 @@ function getConfigDirPath(): String {
 }
 
 export function getConfigPath(config: Config): string {
-    console.log("GETTING CONFIG " + `${getConfigDirPath()}/${config}`)
     return `${getConfigDirPath()}/${config}`
 }
 
