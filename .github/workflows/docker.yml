@@ -6,7 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-typescript:
+    name: Build Typescript project
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -22,6 +23,8 @@ jobs:
     - name: Build
       run: npm run build
 
+  build-docker:
+    name: Build & Publish Docker contailer
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag kirkbot:latest
 
