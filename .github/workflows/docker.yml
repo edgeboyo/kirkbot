@@ -26,6 +26,7 @@ jobs:
   build-docker:
     name: Build & Publish Docker contailer
     runs-on: ubuntu-latest
+    needs: build-typescript
     steps:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag kirkbot:latest
